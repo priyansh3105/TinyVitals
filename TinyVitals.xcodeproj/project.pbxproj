@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		1B3F0BFE2EBFC99B00F00AFB /* ForgotPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B3F0BFD2EBFC99B00F00AFB /* ForgotPasswordViewController.xib */; };
+		1B3F0BFF2EBFC99B00F00AFB /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3F0BFC2EBFC99B00F00AFB /* ForgotPasswordViewController.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		1BB533352EBDEDAC0096BA8A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -24,6 +29,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1B3F0BFC2EBFC99B00F00AFB /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
+		1B3F0BFD2EBFC99B00F00AFB /* ForgotPasswordViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ForgotPasswordViewController.xib; sourceTree = "<group>"; };
 		1BB5331E2EBDEDAB0096BA8A /* TinyVitals.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TinyVitals.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BB533342EBDEDAC0096BA8A /* TinyVitalsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TinyVitalsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BB5333E2EBDEDAC0096BA8A /* TinyVitalsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TinyVitalsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -85,9 +92,43 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1B3F0BF82EBFC82900F00AFB /* Forgot Password */ = {
+			isa = PBXGroup;
+			children = (
+				1B3F0BFB2EBFC84100F00AFB /* Controller */,
+				1B3F0BFA2EBFC83A00F00AFB /* View */,
+				1B3F0BF92EBFC83400F00AFB /* Model */,
+			);
+			path = "Forgot Password";
+			sourceTree = "<group>";
+		};
+		1B3F0BF92EBFC83400F00AFB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1B3F0BFA2EBFC83A00F00AFB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1B3F0BFD2EBFC99B00F00AFB /* ForgotPasswordViewController.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1B3F0BFB2EBFC84100F00AFB /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				1B3F0BFC2EBFC99B00F00AFB /* ForgotPasswordViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		1BB533152EBDEDAB0096BA8A = {
 			isa = PBXGroup;
 			children = (
+				1B3F0BF82EBFC82900F00AFB /* Forgot Password */,
 				1BB533202EBDEDAB0096BA8A /* TinyVitals */,
 				1BB533372EBDEDAC0096BA8A /* TinyVitalsTests */,
 				1BB533412EBDEDAC0096BA8A /* TinyVitalsUITests */,
@@ -225,6 +266,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B3F0BFE2EBFC99B00F00AFB /* ForgotPasswordViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,6 +291,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B3F0BFF2EBFC99B00F00AFB /* ForgotPasswordViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
