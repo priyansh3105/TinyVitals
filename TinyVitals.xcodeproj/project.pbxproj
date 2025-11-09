@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1B3F0B142EBE880D00F00AFB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3F0B122EBE880D00F00AFB /* LoginViewController.swift */; };
 		1B3F0B152EBE880D00F00AFB /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B3F0B132EBE880D00F00AFB /* LoginViewController.xib */; };
 		1B3F0B172EBE885C00F00AFB /* Screenshot 2025-11-06 at 11.32.16 AM.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B3F0B162EBE885C00F00AFB /* Screenshot 2025-11-06 at 11.32.16 AM.png */; };
 		1B3F0B1A2EBF8B0200F00AFB /* apple-icon-white-23.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1B3F0B192EBF8B0200F00AFB /* apple-icon-white-23.jpg */; };
 		1B3F0B1C2EBF8B0F00F00AFB /* iconfinder-new-google-favicon-682665-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B3F0B1B2EBF8B0F00F00AFB /* iconfinder-new-google-favicon-682665-2.png */; };
+		1B3F84B82EC11CB40066C1D7 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3F0B122EBE880D00F00AFB /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -311,7 +311,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1B3F0B142EBE880D00F00AFB /* LoginViewController.swift in Sources */,
+				1B3F84B82EC11CB40066C1D7 /* LoginViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
