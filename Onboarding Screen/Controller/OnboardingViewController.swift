@@ -15,7 +15,12 @@ class OnboardingViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
-
+    
+    @IBAction func continueButtonTapped(_ sender: UIButton){
+        let signUpVC = SignupViewController(nibName: "SignupViewController", bundle: nil)
+        self.navigationController?.pushViewController(signUpVC, animated: true)
+    }
+    
     /*
     // MARK: - Navigation
 

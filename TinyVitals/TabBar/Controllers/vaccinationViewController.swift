@@ -7,26 +7,15 @@
 
 import UIKit
 
-class vaccinationViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class vaccinationViewController: UIViewController {
 
-    var arr: [String] = ["All","At Birth","6 Weeks","10 Weeks","14 Weeks","Month 9","Month 12","Month 15","Month 16","Month 18","Month 23","Year 5","Year 9","Year 10"]
         
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return arr.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! myCollecctionViewCellCollectionViewCell
-        
-        cell.myLabel.text = arr[indexPath.row]
-        return cell
-    }
+
     
 
     /*

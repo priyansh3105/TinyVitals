@@ -21,7 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         // 2. Instantiate your View Controller from its XIB file name
         // The init(nibName:bundle:) initializer is used to load from the XIB.
-        let initialViewController = SignupViewController(nibName: "SignupViewController", bundle: nil)
+        let initialViewController = OnboardingViewController(nibName: "OnboardingViewController", bundle: nil)
 
         // Optional: Embed the VC in a Navigation Controller if your app needs a navigation bar
         let rootNavigationController = UINavigationController(rootViewController: initialViewController)

@@ -15,7 +15,11 @@ class SignupViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
-
+    @IBAction func SignUpBottontapped(_ sender: UIButton) {
+        let tabBarVC = homeViewController(nibName: "homeViewController", bundle: nil)
+        self.navigationController?.pushViewController(tabBarVC, animated: true)
+    }
+    
     /*
     // MARK: - Navigation
 

@@ -54,11 +54,26 @@
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
+/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+		B0F2A5992EC0D6A400284CA8 /* Exceptions for "TinyVitals" folder in "Copy Bundle Resources" phase from "TinyVitals" target */ = {
+			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
+			buildPhase = 1BB5331C2EBDEDAB0096BA8A /* Resources */;
+			membershipExceptions = (
+				TabBar/Controllers/CircularProgressView.swift,
+				TabBar/Controllers/recordViewController.swift,
+				TabBar/Controllers/symptomViewController.swift,
+				TabBar/Controllers/tabBarViewController.swift,
+				TabBar/Controllers/vaccinationViewController.swift,
+			);
+		};
+/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		1BB533202EBDEDAB0096BA8A /* TinyVitals */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				1BB533462EBDEDAC0096BA8A /* Exceptions for "TinyVitals" folder in "TinyVitals" target */,
+				B0F2A5992EC0D6A400284CA8 /* Exceptions for "TinyVitals" folder in "Copy Bundle Resources" phase from "TinyVitals" target */,
 			);
 			path = TinyVitals;
 			sourceTree = "<group>";
