@@ -1,5 +1,5 @@
 //
-//  HomeViewController.swift
+//  tabBarViewController.swift
 //  TinyVitals
 //
 //  Created by admin0 on 09/11/25.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HomeViewController: UIViewController {
+class tabBarViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
