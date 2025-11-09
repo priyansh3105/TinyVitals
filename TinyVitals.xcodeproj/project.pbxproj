@@ -10,6 +10,11 @@
 		1BBCE98B2EBE51FE00D20915 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBCE9892EBE51FE00D20915 /* OnboardingViewController.swift */; };
 		1BBCE98C2EBE51FE00D20915 /* OnboardingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1BBCE98A2EBE51FE00D20915 /* OnboardingViewController.xib */; };
 		1BBCE98E2EBE54A000D20915 /* Sigmar-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1BBCE98D2EBE54A000D20915 /* Sigmar-Regular.ttf */; };
+		1B3F0B152EBE880D00F00AFB /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B3F0B132EBE880D00F00AFB /* LoginViewController.xib */; };
+		1B3F0B172EBE885C00F00AFB /* Screenshot 2025-11-06 at 11.32.16 AM.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B3F0B162EBE885C00F00AFB /* Screenshot 2025-11-06 at 11.32.16 AM.png */; };
+		1B3F0B1A2EBF8B0200F00AFB /* apple-icon-white-23.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1B3F0B192EBF8B0200F00AFB /* apple-icon-white-23.jpg */; };
+		1B3F0B1C2EBF8B0F00F00AFB /* iconfinder-new-google-favicon-682665-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B3F0B1B2EBF8B0F00F00AFB /* iconfinder-new-google-favicon-682665-2.png */; };
+		1B3F84B82EC11CB40066C1D7 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3F0B122EBE880D00F00AFB /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,6 +35,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1B3F0B122EBE880D00F00AFB /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		1B3F0B132EBE880D00F00AFB /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		1B3F0B162EBE885C00F00AFB /* Screenshot 2025-11-06 at 11.32.16 AM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screenshot 2025-11-06 at 11.32.16 AM.png"; sourceTree = "<group>"; };
+		1B3F0B192EBF8B0200F00AFB /* apple-icon-white-23.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "apple-icon-white-23.jpg"; sourceTree = "<group>"; };
+		1B3F0B1B2EBF8B0F00F00AFB /* iconfinder-new-google-favicon-682665-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfinder-new-google-favicon-682665-2.png"; sourceTree = "<group>"; };
 		1BB5331E2EBDEDAB0096BA8A /* TinyVitals.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TinyVitals.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BB533342EBDEDAC0096BA8A /* TinyVitalsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TinyVitalsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BB5333E2EBDEDAC0096BA8A /* TinyVitalsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TinyVitalsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -94,10 +104,55 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1B3F0B0E2EBE87DB00F00AFB /* Login Screen */ = {
+			isa = PBXGroup;
+			children = (
+				1B3F0B182EBE886900F00AFB /* Image */,
+				1B3F0B112EBE87EF00F00AFB /* Controller */,
+				1B3F0B102EBE87E800F00AFB /* View */,
+				1B3F0B0F2EBE87E300F00AFB /* Model */,
+			);
+			path = "Login Screen";
+			sourceTree = "<group>";
+		};
+		1B3F0B0F2EBE87E300F00AFB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1B3F0B102EBE87E800F00AFB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1B3F0B132EBE880D00F00AFB /* LoginViewController.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1B3F0B112EBE87EF00F00AFB /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				1B3F0B122EBE880D00F00AFB /* LoginViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		1B3F0B182EBE886900F00AFB /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				1B3F0B1B2EBF8B0F00F00AFB /* iconfinder-new-google-favicon-682665-2.png */,
+				1B3F0B162EBE885C00F00AFB /* Screenshot 2025-11-06 at 11.32.16 AM.png */,
+				1B3F0B192EBF8B0200F00AFB /* apple-icon-white-23.jpg */,
+			);
+			path = Image;
+			sourceTree = "<group>";
+		};
 		1BB533152EBDEDAB0096BA8A = {
 			isa = PBXGroup;
 			children = (
 				1BBCE9852EBE518400D20915 /* Onboarding Screen */,
+				1B3F0B0E2EBE87DB00F00AFB /* Login Screen */,
 				1BB533202EBDEDAB0096BA8A /* TinyVitals */,
 				1BB533372EBDEDAC0096BA8A /* TinyVitalsTests */,
 				1BB533412EBDEDAC0096BA8A /* TinyVitalsUITests */,
@@ -271,6 +326,10 @@
 			files = (
 				1BBCE98E2EBE54A000D20915 /* Sigmar-Regular.ttf in Resources */,
 				1BBCE98C2EBE51FE00D20915 /* OnboardingViewController.xib in Resources */,
+				1B3F0B1C2EBF8B0F00F00AFB /* iconfinder-new-google-favicon-682665-2.png in Resources */,
+				1B3F0B1A2EBF8B0200F00AFB /* apple-icon-white-23.jpg in Resources */,
+				1B3F0B152EBE880D00F00AFB /* LoginViewController.xib in Resources */,
+				1B3F0B172EBE885C00F00AFB /* Screenshot 2025-11-06 at 11.32.16 AM.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,6 +355,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1BBCE98B2EBE51FE00D20915 /* OnboardingViewController.swift in Sources */,
+				1B3F84B82EC11CB40066C1D7 /* LoginViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
