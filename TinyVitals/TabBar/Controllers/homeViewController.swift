@@ -13,10 +13,12 @@ class homeViewController: UIViewController {
     
     @IBOutlet weak var childProfileImageView: UIImageView!
     
+    @IBOutlet weak var childProfileCompletionStatus: CircularProgressView!
     override func viewDidLoad() {
         super.viewDidLoad()
         setupGradient()
         childProfileImageView.layer.borderColor = UIColor.systemBlue.cgColor
+        childProfileCompletionStatus.progress = 0.6
         // Do any additional setup after loading the view.
     }
     func setupGradient() {

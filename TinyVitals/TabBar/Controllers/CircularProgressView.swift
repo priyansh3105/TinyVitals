@@ -89,7 +89,7 @@ class CircularProgressView: UIView {
     private func setupProgressLabel() {
         progressLabel.translatesAutoresizingMaskIntoConstraints = false
         progressLabel.textAlignment = .center
-        progressLabel.font = UIFont.systemFont(ofSize: 32, weight: .bold) // Appropriate size for percentage
+        progressLabel.font = UIFont.systemFont(ofSize: 40, weight: .bold) // Appropriate size for percentage
         progressLabel.textColor = .black
         progressLabel.text = "0%" // Initial value
         
