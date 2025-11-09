@@ -15,6 +15,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     // In SceneDelegate.swift
 
+    // In SceneDelegate.swift
+
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
@@ -23,7 +25,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         // 2. Instantiate your View Controller from its XIB file name
         // The init(nibName:bundle:) initializer is used to load from the XIB.
+<<<<<<< HEAD
         let initialViewController = OnboardingViewController(nibName: "OnboardingViewController", bundle: nil)
+=======
+        let initialViewController = ForgotPasswordViewController(nibName: "ForgotPasswordViewController", bundle: nil)
+>>>>>>> ForgotPassword
 
         // Optional: Embed the VC in a Navigation Controller if your app needs a navigation bar
         let rootNavigationController = UINavigationController(rootViewController: initialViewController)
