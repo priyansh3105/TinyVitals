@@ -6,6 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		1BBCE98B2EBE51FE00D20915 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBCE9892EBE51FE00D20915 /* OnboardingViewController.swift */; };
+		1BBCE98C2EBE51FE00D20915 /* OnboardingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1BBCE98A2EBE51FE00D20915 /* OnboardingViewController.xib */; };
+		1BBCE98E2EBE54A000D20915 /* Sigmar-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1BBCE98D2EBE54A000D20915 /* Sigmar-Regular.ttf */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		1BB533352EBDEDAC0096BA8A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,6 +33,9 @@
 		1BB5331E2EBDEDAB0096BA8A /* TinyVitals.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TinyVitals.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BB533342EBDEDAC0096BA8A /* TinyVitalsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TinyVitalsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BB5333E2EBDEDAC0096BA8A /* TinyVitalsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TinyVitalsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1BBCE9892EBE51FE00D20915 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		1BBCE98A2EBE51FE00D20915 /* OnboardingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OnboardingViewController.xib; sourceTree = "<group>"; };
+		1BBCE98D2EBE54A000D20915 /* Sigmar-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Sigmar-Regular.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -88,6 +97,7 @@
 		1BB533152EBDEDAB0096BA8A = {
 			isa = PBXGroup;
 			children = (
+				1BBCE9852EBE518400D20915 /* Onboarding Screen */,
 				1BB533202EBDEDAB0096BA8A /* TinyVitals */,
 				1BB533372EBDEDAC0096BA8A /* TinyVitalsTests */,
 				1BB533412EBDEDAC0096BA8A /* TinyVitalsUITests */,
@@ -103,6 +113,40 @@
 				1BB5333E2EBDEDAC0096BA8A /* TinyVitalsUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		1BBCE9852EBE518400D20915 /* Onboarding Screen */ = {
+			isa = PBXGroup;
+			children = (
+				1BBCE98D2EBE54A000D20915 /* Sigmar-Regular.ttf */,
+				1BBCE9882EBE51A000D20915 /* Controller */,
+				1BBCE9872EBE519700D20915 /* View */,
+				1BBCE9862EBE519100D20915 /* Model */,
+			);
+			path = "Onboarding Screen";
+			sourceTree = "<group>";
+		};
+		1BBCE9862EBE519100D20915 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1BBCE9872EBE519700D20915 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1BBCE98A2EBE51FE00D20915 /* OnboardingViewController.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1BBCE9882EBE51A000D20915 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				1BBCE9892EBE51FE00D20915 /* OnboardingViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -225,6 +269,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1BBCE98E2EBE54A000D20915 /* Sigmar-Regular.ttf in Resources */,
+				1BBCE98C2EBE51FE00D20915 /* OnboardingViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,6 +295,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1BBCE98B2EBE51FE00D20915 /* OnboardingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
