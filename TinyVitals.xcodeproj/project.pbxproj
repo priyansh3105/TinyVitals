@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1BBCE98B2EBE51FE00D20915 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBCE9892EBE51FE00D20915 /* OnboardingViewController.swift */; };
-		1BBCE98C2EBE51FE00D20915 /* OnboardingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1BBCE98A2EBE51FE00D20915 /* OnboardingViewController.xib */; };
-		1BBCE98E2EBE54A000D20915 /* Sigmar-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1BBCE98D2EBE54A000D20915 /* Sigmar-Regular.ttf */; };
 		1B3F0BDD2EBFA93E00F00AFB /* SignupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B3F0BDC2EBFA93E00F00AFB /* SignupViewController.xib */; };
 		1B3F0BDE2EBFA93E00F00AFB /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3F0BDB2EBFA93E00F00AFB /* SignupViewController.swift */; };
 		1B3F0BE12EBFA9AC00F00AFB /* Screenshot 2025-11-06 at 11.32.16 AM.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B3F0BE02EBFA9AC00F00AFB /* Screenshot 2025-11-06 at 11.32.16 AM.png */; };
+		1BBCE98B2EBE51FE00D20915 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBCE9892EBE51FE00D20915 /* OnboardingViewController.swift */; };
+		1BBCE98C2EBE51FE00D20915 /* OnboardingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1BBCE98A2EBE51FE00D20915 /* OnboardingViewController.xib */; };
+		1BBCE98E2EBE54A000D20915 /* Sigmar-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1BBCE98D2EBE54A000D20915 /* Sigmar-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
