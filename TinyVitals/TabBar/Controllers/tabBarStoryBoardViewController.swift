@@ -1,25 +1,21 @@
 //
-//  OnboardingViewController.swift
+//  tabBarStoryBoardViewController.swift
 //  TinyVitals
 //
-//  Created by user45 on 07/11/25.
+//  Created by admin0 on 10/11/25.
 //
 
 import UIKit
 
-class OnboardingViewController: UIViewController {
+class tabBarStoryBoardViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
-
-    @IBAction func continueButtonTapped(_ sender: UIButton) {
-        let loginVC = LoginViewController(nibName: "LoginViewController", bundle: nil)
-                navigationController?.pushViewController(loginVC, animated: true)
-    }
     
+
     /*
     // MARK: - Navigation
 

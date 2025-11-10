@@ -127,7 +127,7 @@
                     </constraints>
                 </stackView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iUS-aD-X3r">
-                    <rect key="frame" x="20" y="498" width="353" height="40"/>
+                    <rect key="frame" x="20" y="523" width="353" height="40"/>
                     <color key="backgroundColor" red="0.33333333333333331" green="0.49803921568627452" blue="0.76862745098039209" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="EAl-aP-dgA"/>
@@ -142,9 +142,12 @@
                             <integer key="value" value="10"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="signInButtonTapped:" destination="-1" eventType="touchUpInside" id="qft-sg-W1e"/>
+                    </connections>
                 </button>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="VnJ-Fx-Hbz">
-                    <rect key="frame" x="20" y="588" width="353" height="150"/>
+                    <rect key="frame" x="20" y="613" width="353" height="150"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SY1-vE-y8h">
                             <rect key="frame" x="0.0" y="0.0" width="353" height="40"/>
@@ -217,6 +220,9 @@
                                     </constraints>
                                     <state key="normal" title="Button"/>
                                     <buttonConfiguration key="configuration" style="plain" title="Sign up"/>
+                                    <connections>
+                                        <action selector="signUpButtontapped:" destination="-1" eventType="touchUpInside" id="q97-A6-Olc"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -233,6 +239,19 @@
                         <constraint firstAttribute="height" constant="150" id="lVS-cK-eWy"/>
                     </constraints>
                 </stackView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="buF-p1-zQT">
+                    <rect key="frame" x="231.33333333333337" y="453" width="151.66666666666663" height="25"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="25" id="0lx-2B-40F"/>
+                    </constraints>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" title="Forgot Password">
+                        <fontDescription key="titleFontDescription" type="system" pointSize="17"/>
+                    </buttonConfiguration>
+                    <connections>
+                        <action selector="forgotPasswordButtonTapped:" destination="-1" eventType="touchUpInside" id="Oxu-NC-wZg"/>
+                    </connections>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -243,7 +262,9 @@
                 <constraint firstItem="AW8-Aq-Zcg" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="EuT-Jg-SFL"/>
                 <constraint firstItem="DpD-Pt-pIN" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="Kn9-yv-4eP"/>
                 <constraint firstItem="iUS-aD-X3r" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="LNU-7V-x0x"/>
-                <constraint firstItem="iUS-aD-X3r" firstAttribute="top" secondItem="AW8-Aq-Zcg" secondAttribute="bottom" constant="50" id="Oti-ZV-Ay5"/>
+                <constraint firstItem="iUS-aD-X3r" firstAttribute="top" secondItem="AW8-Aq-Zcg" secondAttribute="bottom" constant="75" id="Oti-ZV-Ay5"/>
+                <constraint firstItem="buF-p1-zQT" firstAttribute="top" secondItem="AW8-Aq-Zcg" secondAttribute="bottom" constant="5" id="QhO-vR-lhi"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="buF-p1-zQT" secondAttribute="trailing" constant="10" id="VeV-TP-E05"/>
                 <constraint firstItem="DpD-Pt-pIN" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="WtA-Bh-UiK"/>
                 <constraint firstItem="VnJ-Fx-Hbz" firstAttribute="top" secondItem="iUS-aD-X3r" secondAttribute="bottom" constant="50" id="hYm-4V-DDf"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="DpD-Pt-pIN" secondAttribute="trailing" constant="20" id="hdU-uk-MJh"/>
