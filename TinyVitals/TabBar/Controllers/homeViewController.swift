@@ -42,6 +42,10 @@ class homeViewController: UIViewController {
         homeSuperView.layer.insertSublayer(gradientLayer, at: 0)
     }
     
+    @IBAction func parentProfileButtonTapped(_ sender: UIBarButtonItem) {
+        let parentProfileVC = ParentProfileViewController(nibName: "ParentProfileViewController", bundle: nil)
+                navigationController?.pushViewController(parentProfileVC, animated: true)
+    }
     /*
     // MARK: - Navigation
 
