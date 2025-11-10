@@ -15,7 +15,11 @@ class OnboardingViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
-
+//    @IBAction func continueButtonTapped(_ sender: UIButton) {
+//        let loginVC = ProfileViewController(nibName: "ProfileViewController", bundle: nil)
+//                navigationController?.present(loginVC, animated: true)
+//    }
+    
     /*
     // MARK: - Navigation
 

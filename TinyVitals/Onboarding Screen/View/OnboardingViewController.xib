@@ -57,7 +57,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Medical Record Manager" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vFX-RU-dF4">
-                                    <rect key="frame" x="86" y="20" width="269.66666666666669" height="25"/>
+                                    <rect key="frame" x="86" y="20" width="282" height="25"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="25" id="jfR-99-1P5"/>
                                     </constraints>
@@ -96,7 +96,7 @@
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Symptoms Tracker" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IN3-T9-NHX">
-                                    <rect key="frame" x="85.999999999999986" y="20" width="203.66666666666663" height="25"/>
+                                    <rect key="frame" x="86" y="20" width="282" height="25"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="25" id="WEW-S7-qBM"/>
                                     </constraints>
@@ -119,7 +119,6 @@
                                 <constraint firstItem="Wgi-Of-u5L" firstAttribute="top" secondItem="IN3-T9-NHX" secondAttribute="bottom" constant="2" id="8fP-gr-y7O"/>
                                 <constraint firstItem="Wgi-Of-u5L" firstAttribute="leading" secondItem="nhC-mP-je8" secondAttribute="trailing" constant="10" id="CNS-61-fOJ"/>
                                 <constraint firstItem="IN3-T9-NHX" firstAttribute="leading" secondItem="nhC-mP-je8" secondAttribute="trailing" constant="10" id="Ekf-bA-7Yw"/>
-                                <constraint firstAttribute="width" constant="75" id="YS4-hl-WRT"/>
                                 <constraint firstAttribute="bottom" secondItem="nhC-mP-je8" secondAttribute="bottom" constant="2" id="gdM-sI-a9a"/>
                                 <constraint firstAttribute="trailing" secondItem="IN3-T9-NHX" secondAttribute="trailing" constant="5" id="iU2-Oe-J6O"/>
                                 <constraint firstItem="nhC-mP-je8" firstAttribute="top" secondItem="9Q8-Om-Gnd" secondAttribute="top" constant="2" id="sXD-c4-0fY"/>
@@ -137,7 +136,7 @@
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vaccination Tracker" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gc5-KB-pzQ">
-                                    <rect key="frame" x="85.999999999999986" y="20" width="213.66666666666663" height="25"/>
+                                    <rect key="frame" x="86" y="20" width="282" height="25"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="25" id="Fy4-2S-SZ8"/>
                                     </constraints>
@@ -178,12 +177,15 @@
                         <constraint firstAttribute="height" constant="40" id="FFQ-Je-hid"/>
                     </constraints>
                     <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" title="Continue"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                             <integer key="value" value="10"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="continueButtonTapped:" destination="-1" eventType="touchUpInside" id="Yzi-Ft-1Kf"/>
+                    </connections>
                 </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
