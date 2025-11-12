@@ -8,8 +8,8 @@
 import UIKit
 
 struct ChildProfile {
-    let name: String
-    let imageName: String
+    var name: String
+    var imageName: String
 }
 
 class ChildProfilesCollectionViewController: UIViewController {
@@ -17,8 +17,9 @@ class ChildProfilesCollectionViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var addButton: UIButton!
 
+    // 🧩 Start with one empty placeholder profile
     var profiles: [ChildProfile] = [
-        ChildProfile(name: "Charlie", imageName: "Charlie")
+        ChildProfile(name: "", imageName: "")
     ]
 
     override func viewDidLoad() {
@@ -41,13 +42,15 @@ class ChildProfilesCollectionViewController: UIViewController {
         addButton.clipsToBounds = true
     }
 
+    // ✅ Show Add Profile screen
     @IBAction func addButtonTapped(_ sender: UIButton) {
-        let newChild = ChildProfile(name: "Child-\(profiles.count + 1)", imageName: "Charlie")
-        profiles.append(newChild)
-        collectionView.reloadData()
+        let addVC = AddChildProfileViewController(nibName: "AddChildProfileViewController", bundle: nil)
+        addVC.delegate = self
+        present(addVC, animated: true)
     }
 }
 
+// MARK: - Collection View Setup
 extension ChildProfilesCollectionViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -58,12 +61,20 @@ extension ChildProfilesCollectionViewController: UICollectionViewDataSource, UIC
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ChildProfileCell", for: indexPath) as! ChildProfileCell
         let model = profiles[indexPath.item]
-        cell.nameLabel.text = model.name
-        cell.childImageView.image = UIImage(named: model.imageName)
+
+        // If profile is empty, show placeholder
+        if model.name.isEmpty {
+            cell.nameLabel.text = ""
+            cell.childImageView.image = UIImage(systemName: "person.crop.circle.badge.plus")
+        } else {
+            cell.nameLabel.text = model.name
+            cell.childImageView.image = UIImage(named: model.imageName)
+        }
+
         return cell
     }
 
-    // ✅ Dynamic sizing logic
+    // ✅ Layout logic (center first card / 2x2 grid later)
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -73,7 +84,6 @@ extension ChildProfilesCollectionViewController: UICollectionViewDataSource, UIC
         let sideInset: CGFloat = 20
 
         if profiles.count == 1 {
-            // 💡 Center the only cell horizontally
             let cellWidth = collectionWidth * 0.6
             let xInset = (collectionWidth - cellWidth) / 2
             if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
@@ -81,7 +91,6 @@ extension ChildProfilesCollectionViewController: UICollectionViewDataSource, UIC
             }
             return CGSize(width: cellWidth, height: cellWidth)
         } else {
-            // 💡 Arrange 2 cells per row (like before)
             if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
                 layout.sectionInset = UIEdgeInsets(top: 20, left: sideInset, bottom: 20, right: sideInset)
             }
@@ -91,3 +100,18 @@ extension ChildProfilesCollectionViewController: UICollectionViewDataSource, UIC
         }
     }
 }
+
+// MARK: - Delegate from AddChildProfileViewController
+extension ChildProfilesCollectionViewController: AddChildProfileDelegate {
+    func didAddChildProfile(_ profile: ChildProfile) {
+        // If first card is empty, replace it
+        if profiles.count == 1 && profiles[0].name.isEmpty {
+            profiles[0] = profile
+        } else {
+            profiles.append(profile)
+        }
+        collectionView.reloadData()
+    }
+}
+
+

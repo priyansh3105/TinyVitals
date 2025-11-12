@@ -9,7 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ChildProfilesCollectionViewController" customModule="TinyVitals" customModuleProvider="target">
             <connections>
-                <outlet property="addButton" destination="OGA-x1-VKL" id="wX2-Kn-iaU"/>
+                <outlet property="addButton" destination="OGA-x1-VKL" id="den-2S-oXz"/>
                 <outlet property="collectionView" destination="UhM-5G-pgs" id="eAk-6Q-W3u"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -52,17 +52,17 @@
                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.cornerRadius" value="YES"/>
                     </userDefinedRuntimeAttributes>
                     <connections>
-                        <action selector="addButtonTapped:" destination="-1" eventType="touchUpInside" id="gJy-Jz-e17"/>
+                        <action selector="addButtonTapped:" destination="-1" eventType="touchUpInside" id="6G6-p6-kI6"/>
                     </connections>
                 </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" red="0.98039215686274506" green="0.94901960784313721" blue="0.99607843137254903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="OGA-x1-VKL" secondAttribute="bottom" constant="90" id="25v-yv-Bhw"/>
                 <constraint firstItem="XBk-oG-5f8" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="B1x-j1-UGT"/>
                 <constraint firstItem="OGA-x1-VKL" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="JqK-Ix-iRA"/>
                 <constraint firstItem="UhM-5G-pgs" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="OHu-gw-eFq"/>
+                <constraint firstItem="OGA-x1-VKL" firstAttribute="top" secondItem="UhM-5G-pgs" secondAttribute="bottom" constant="80" id="Ssc-u3-z0y"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="UhM-5G-pgs" secondAttribute="bottom" constant="230" id="Xyl-jY-htM"/>
                 <constraint firstItem="UhM-5G-pgs" firstAttribute="top" secondItem="XBk-oG-5f8" secondAttribute="bottom" constant="120" id="gBf-c5-Ghm"/>
                 <constraint firstItem="XBk-oG-5f8" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="gPM-AX-3xW"/>
