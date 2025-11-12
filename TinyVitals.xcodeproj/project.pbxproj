@@ -13,6 +13,7 @@
 		1BC2448A2EC4391C0062CB58 /* ChildProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC244872EC4391C0062CB58 /* ChildProfileCell.swift */; };
 		1BC2448D2EC43FD40062CB58 /* AddChildProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1BC2448C2EC43FD40062CB58 /* AddChildProfileViewController.xib */; };
 		1BC2448E2EC43FD40062CB58 /* AddChildProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC2448B2EC43FD40062CB58 /* AddChildProfileViewController.swift */; };
+		1BC245402EC4FB130062CB58 /* ChildDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC2453F2EC4FB130062CB58 /* ChildDetails.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +43,7 @@
 		1BC244882EC4391C0062CB58 /* ChildProfileCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChildProfileCell.xib; sourceTree = "<group>"; };
 		1BC2448B2EC43FD40062CB58 /* AddChildProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddChildProfileViewController.swift; sourceTree = "<group>"; };
 		1BC2448C2EC43FD40062CB58 /* AddChildProfileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddChildProfileViewController.xib; sourceTree = "<group>"; };
+		1BC2453F2EC4FB130062CB58 /* ChildDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildDetails.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -134,6 +136,7 @@
 		1BC244802EC3CC5F0062CB58 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				1BC2453F2EC4FB130062CB58 /* ChildDetails.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -306,6 +309,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1BC244862EC3CCB50062CB58 /* ChildProfilesCollectionViewController.swift in Sources */,
+				1BC245402EC4FB130062CB58 /* ChildDetails.swift in Sources */,
 				1BC2448A2EC4391C0062CB58 /* ChildProfileCell.swift in Sources */,
 				1BC2448E2EC43FD40062CB58 /* AddChildProfileViewController.swift in Sources */,
 			);

@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddChildProfileViewController" customModule="TinyVitals" customModuleProvider="target">
             <connections>
+                <outlet property="childImageView" destination="3z6-zJ-Llm" id="vvM-Nb-r1W"/>
                 <outlet property="dateOfBirth" destination="5it-a6-ncp" id="uCa-Yn-7qW"/>
                 <outlet property="genderTextField" destination="qPl-Ra-uWd" id="gin-r4-CnL"/>
                 <outlet property="nameTextField" destination="Ztx-FZ-aM5" id="KQR-IP-ciz"/>
@@ -47,11 +48,11 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="vv4-6q-8Jw">
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="vv4-6q-8Jw">
                     <rect key="frame" x="20" y="378" width="353" height="159"/>
                     <subviews>
                         <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ztx-FZ-aM5">
-                            <rect key="frame" x="0.0" y="0.0" width="353" height="43"/>
+                            <rect key="frame" x="0.0" y="0.0" width="353" height="42.333333333333336"/>
                             <color key="backgroundColor" red="0.80000000000000004" green="0.85882352941176465" blue="0.95294117647058818" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <textInputTraits key="textInputTraits"/>
@@ -62,7 +63,7 @@
                             </userDefinedRuntimeAttributes>
                         </textField>
                         <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Date of Birth" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5it-a6-ncp">
-                            <rect key="frame" x="0.0" y="58" width="353" height="43"/>
+                            <rect key="frame" x="0.0" y="58.333333333333314" width="353" height="42.333333333333343"/>
                             <color key="backgroundColor" red="0.80000000000000004" green="0.85882352939999995" blue="0.95294117649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <textInputTraits key="textInputTraits"/>
@@ -73,7 +74,7 @@
                             </userDefinedRuntimeAttributes>
                         </textField>
                         <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Gender" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qPl-Ra-uWd">
-                            <rect key="frame" x="0.0" y="116" width="353" height="43"/>
+                            <rect key="frame" x="0.0" y="116.66666666666667" width="353" height="42.333333333333329"/>
                             <color key="backgroundColor" red="0.80000000000000004" green="0.85882352939999995" blue="0.95294117649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <textInputTraits key="textInputTraits"/>

@@ -5,21 +5,17 @@
 //  Created by user45 on 12/11/25.
 //
 
-import UIKit
 
-struct ChildProfile {
-    var name: String
-    var imageName: String
-}
+import UIKit
 
 class ChildProfilesCollectionViewController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var addButton: UIButton!
 
-    // 🧩 Start with one empty placeholder profile
-    var profiles: [ChildProfile] = [
-        ChildProfile(name: "", imageName: "")
+    // Use the shared model type (defined in ChildDetails.swift)
+    var profiles: [ChildDetails] = [
+        ChildDetails(name: "", dob: "", gender: "", image: nil)
     ]
 
     override func viewDidLoad() {
@@ -42,7 +38,7 @@ class ChildProfilesCollectionViewController: UIViewController {
         addButton.clipsToBounds = true
     }
 
-    // ✅ Show Add Profile screen
+    // Present Add Profile screen (assumes nib or storyboard ID exists)
     @IBAction func addButtonTapped(_ sender: UIButton) {
         let addVC = AddChildProfileViewController(nibName: "AddChildProfileViewController", bundle: nil)
         addVC.delegate = self
@@ -68,13 +64,13 @@ extension ChildProfilesCollectionViewController: UICollectionViewDataSource, UIC
             cell.childImageView.image = UIImage(systemName: "person.crop.circle.badge.plus")
         } else {
             cell.nameLabel.text = model.name
-            cell.childImageView.image = UIImage(named: model.imageName)
+            cell.childImageView.image = model.image ?? UIImage(systemName: "person.circle.fill")
         }
 
         return cell
     }
 
-    // ✅ Layout logic (center first card / 2x2 grid later)
+    // Layout logic
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -103,8 +99,7 @@ extension ChildProfilesCollectionViewController: UICollectionViewDataSource, UIC
 
 // MARK: - Delegate from AddChildProfileViewController
 extension ChildProfilesCollectionViewController: AddChildProfileDelegate {
-    func didAddChildProfile(_ profile: ChildProfile) {
-        // If first card is empty, replace it
+    func didAddChildProfile(_ profile: ChildDetails) {
         if profiles.count == 1 && profiles[0].name.isEmpty {
             profiles[0] = profile
         } else {
@@ -113,5 +108,3 @@ extension ChildProfilesCollectionViewController: AddChildProfileDelegate {
         collectionView.reloadData()
     }
 }
-
-

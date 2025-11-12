@@ -14,29 +14,24 @@ class ChildProfileCell: UICollectionViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Visual polishing
         backgroundContainer.clipsToBounds = true
-
         childImageView.contentMode = .scaleAspectFill
         childImageView.clipsToBounds = true
-        // If you want circle avatar, set cornerRadius in layoutSubviews
     }
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        // make image circular if it's square
         childImageView.layer.cornerRadius = childImageView.bounds.height / 2
     }
 
-    // ---- ADD THIS METHOD ----
-    func configure(with model: ChildProfile) {
+    func configure(with model: ChildDetails) {
         nameLabel.text = model.name
-        if let img = UIImage(named: model.imageName) {
+        if let img = model.image {
             childImageView.image = img
         } else {
-            // fallback placeholder if asset missing
             childImageView.image = UIImage(systemName: "person.crop.circle.fill")
         }
     }
 }
+
 
