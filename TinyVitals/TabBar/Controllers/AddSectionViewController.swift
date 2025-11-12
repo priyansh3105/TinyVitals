@@ -26,21 +26,30 @@ class AddSectionViewController: UIViewController {
     }
     
     @IBAction func finalAddButtonTapped(_ sender: Any) {
-        // 1. Validate the text field (assuming nameTextField is connected)
-        guard let sectionName = nameTextField.text, !sectionName.isEmpty else {
-            // Show an alert if the name is empty
+        // 1. Validate input
+        guard let sectionName = nameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines), !sectionName.isEmpty else {
+            showConfirmationMessage(title: "Required", message: "Please enter a name for the new section.")
             return
         }
         
-        // 2. Delegate the new section name back to the recordViewController
+        // 2. Delegate the new name back to the recordViewController
+        // This calls the didAddSection(name:) method in the main view controller.
         delegate?.didAddSection(name: sectionName)
         
-        // 3. Dismiss the modal screen
+        // 3. Dismiss the modal screen (The main VC will refresh the tags after this returns)
         dismiss(animated: true, completion: nil)
     }
     
+    @objc func cancelButtonTapped() {
+        // Simply dismiss the modal presentation
+        dismiss(animated: true, completion: nil)
+    }
     
-
+    func showConfirmationMessage(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
     /*
     // MARK: - Navigation
 

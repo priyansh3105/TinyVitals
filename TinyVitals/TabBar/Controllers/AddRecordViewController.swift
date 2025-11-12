@@ -136,26 +136,19 @@ class AddRecordViewController: UIViewController, UIDocumentPickerDelegate, UIIma
             controller.dismiss(animated: true); return
         }
         
-        // 1. Store Data and Start Access
         _ = url.startAccessingSecurityScopedResource()
         selectedFileURL = url
         selectedFileType = url.pathExtension.uppercased()
         
         // 2. Generate Thumbnail on Background Thread (HIG: Responsiveness)
         controller.dismiss(animated: true) {
-            
-            // Reset the preview appearance (hide the plus sign if using a label/icon)
-            // [Optional: Hide any text/icons indicating 'Add File' in uploadArea]
-            
             DispatchQueue.global(qos: .userInitiated).async {
                 let type = self.selectedFileType
                 var thumbnail: UIImage?
                 
                 if type == "PDF" {
-                    // Ensure you have copied/implemented this function
                     thumbnail = self.generateThumbnailFromPDF(url: url)
                 } else if ["IMAGE", "JPG", "PNG"].contains(type) {
-                    // Ensure you have copied/implemented this function
                     thumbnail = self.generateThumbnailFromImage(url: url)
                 }
                 
