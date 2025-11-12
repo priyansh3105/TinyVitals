@@ -10,18 +10,18 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddSectionViewController" customModule="TinyVitals" customModuleProvider="target">
             <connections>
-                <outlet property="addButton" destination="8eT-FV-jBd" id="Xrz-1D-i7d"/>
-                <outlet property="nameTextField" destination="2Fg-g1-MNb" id="Ujs-tg-i3U"/>
+                <outlet property="addButton" destination="8eT-FV-jBd" id="alv-De-d50"/>
+                <outlet property="nameTextField" destination="2Fg-g1-MNb" id="UWg-sU-Mtn"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2Fg-g1-MNb">
-                    <rect key="frame" x="20" y="128" width="335" height="43"/>
+                    <rect key="frame" x="20" y="128" width="353" height="43"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="43" id="934-MU-pBn"/>
                     </constraints>
@@ -29,7 +29,7 @@
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8eT-FV-jBd">
-                    <rect key="frame" x="20" y="207" width="335" height="43"/>
+                    <rect key="frame" x="20" y="207" width="353" height="43"/>
                     <color key="backgroundColor" red="0.30980392159999998" green="0.5568627451" blue="0.87843137250000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="43" id="MgM-LD-pkV"/>
@@ -43,7 +43,7 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                     <connections>
-                        <action selector="finalAddButtonTapped:" destination="-1" eventType="touchUpInside" id="7Ii-YH-Rj3"/>
+                        <action selector="finalAddButtonTapped:" destination="-1" eventType="touchUpInside" id="8G8-og-k7J"/>
                     </connections>
                 </button>
             </subviews>

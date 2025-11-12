@@ -161,7 +161,7 @@ class recordViewController: UIViewController, UITableViewDelegate, UITableViewDa
     // MARK: - Actions & Delegate Implementations
     
     @IBAction func addSectionButtonTapped(_ sender: Any) {
-        let addSectionVC = AddRecordViewController(nibName: "AddSectionViewController", bundle: nil) // Assumed AddSectionVC for demonstration
+        let addSectionVC = AddSectionViewController(nibName: "AddSectionViewController", bundle: nil)
         addSectionVC.delegate = self
         present(UINavigationController(rootViewController: addSectionVC), animated: true)
     }
