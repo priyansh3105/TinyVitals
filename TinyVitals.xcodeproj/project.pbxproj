@@ -6,6 +6,13 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		1BC244852EC3CCB50062CB58 /* ChildProfilesCollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1BC244842EC3CCB50062CB58 /* ChildProfilesCollectionViewController.xib */; };
+		1BC244862EC3CCB50062CB58 /* ChildProfilesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC244832EC3CCB50062CB58 /* ChildProfilesCollectionViewController.swift */; };
+		1BC244892EC4391C0062CB58 /* ChildProfileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1BC244882EC4391C0062CB58 /* ChildProfileCell.xib */; };
+		1BC2448A2EC4391C0062CB58 /* ChildProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC244872EC4391C0062CB58 /* ChildProfileCell.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		1BB533352EBDEDAC0096BA8A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,6 +34,10 @@
 		1BB5331E2EBDEDAB0096BA8A /* TinyVitals.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TinyVitals.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BB533342EBDEDAC0096BA8A /* TinyVitalsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TinyVitalsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BB5333E2EBDEDAC0096BA8A /* TinyVitalsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TinyVitalsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1BC244832EC3CCB50062CB58 /* ChildProfilesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildProfilesCollectionViewController.swift; sourceTree = "<group>"; };
+		1BC244842EC3CCB50062CB58 /* ChildProfilesCollectionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChildProfilesCollectionViewController.xib; sourceTree = "<group>"; };
+		1BC244872EC4391C0062CB58 /* ChildProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildProfileCell.swift; sourceTree = "<group>"; };
+		1BC244882EC4391C0062CB58 /* ChildProfileCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChildProfileCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -88,6 +99,7 @@
 		1BB533152EBDEDAB0096BA8A = {
 			isa = PBXGroup;
 			children = (
+				1BC2447F2EC3CC3E0062CB58 /* ChildProfileSelection */,
 				1BB533202EBDEDAB0096BA8A /* TinyVitals */,
 				1BB533372EBDEDAC0096BA8A /* TinyVitalsTests */,
 				1BB533412EBDEDAC0096BA8A /* TinyVitalsUITests */,
@@ -103,6 +115,41 @@
 				1BB5333E2EBDEDAC0096BA8A /* TinyVitalsUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		1BC2447F2EC3CC3E0062CB58 /* ChildProfileSelection */ = {
+			isa = PBXGroup;
+			children = (
+				1BC244822EC3CC690062CB58 /* controller */,
+				1BC244812EC3CC650062CB58 /* view */,
+				1BC244802EC3CC5F0062CB58 /* model */,
+			);
+			path = ChildProfileSelection;
+			sourceTree = "<group>";
+		};
+		1BC244802EC3CC5F0062CB58 /* model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		1BC244812EC3CC650062CB58 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				1BC244882EC4391C0062CB58 /* ChildProfileCell.xib */,
+				1BC244842EC3CCB50062CB58 /* ChildProfilesCollectionViewController.xib */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		1BC244822EC3CC690062CB58 /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				1BC244832EC3CCB50062CB58 /* ChildProfilesCollectionViewController.swift */,
+				1BC244872EC4391C0062CB58 /* ChildProfileCell.swift */,
+			);
+			path = controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -225,6 +272,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1BC244852EC3CCB50062CB58 /* ChildProfilesCollectionViewController.xib in Resources */,
+				1BC244892EC4391C0062CB58 /* ChildProfileCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,6 +298,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1BC244862EC3CCB50062CB58 /* ChildProfilesCollectionViewController.swift in Sources */,
+				1BC2448A2EC4391C0062CB58 /* ChildProfileCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
