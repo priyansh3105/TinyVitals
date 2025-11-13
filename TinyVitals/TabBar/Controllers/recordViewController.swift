@@ -9,8 +9,9 @@ import UIKit
 import MobileCoreServices
 import UniformTypeIdentifiers
 import CoreGraphics
+import QuickLook
 
-class recordViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AddRecordDelegate, UISearchBarDelegate, AddSectionDelegate {
+class recordViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AddRecordDelegate, UISearchBarDelegate, AddSectionDelegate, UIDocumentInteractionControllerDelegate {
     
     // MARK: - Outlets
     @IBOutlet var recordSuperView: UIView!
@@ -28,6 +29,7 @@ class recordViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var allSections: [String] = ["All", "Prescription", "+"]
     var selectedSection: String = "All"
     
+    var documentInteractionController: UIDocumentInteractionController?
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -48,7 +50,7 @@ class recordViewController: UIViewController, UITableViewDelegate, UITableViewDa
         super.viewDidLayoutSubviews()
         // Ensure size and circularity are enforced for the Floating Action Button
         let desiredSize: CGFloat = 60.0
-        let cornerRadius: CGFloat = 30.0
+        let cornerRadius: CGFloat = 25.0
         
         if addButton.layer.cornerRadius != cornerRadius {
             addButton.frame.size = CGSize(width: desiredSize, height: desiredSize)
@@ -116,20 +118,21 @@ class recordViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         // Set Title/Image
         if isAddButton {
-            button.setImage(UIImage(systemName: "plus.circle.fill"), for: .normal)
+            button.setImage(UIImage(systemName: "plus"), for: .normal)
             button.setTitle(nil, for: .normal)
         } else {
             button.setTitle(title, for: .normal)
         }
 
         // Styling (Pill Shape)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
-        button.contentEdgeInsets = UIEdgeInsets(top: 4, left: 10, bottom: 4, right: 10)
-        button.layer.cornerRadius = 11 // Half of a 36pt effective button height
-        
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 12, weight: .medium)
+        button.contentEdgeInsets = UIEdgeInsets(top: 8, left: 10, bottom: 8, right: 10)
+        button.layer.cornerRadius = 14 // Half of a 36pt effective button height
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor(red: 0.12, green: 0.45, blue: 0.9, alpha: 1.0).cgColor
         // Color Logic
-        let backgroundColor = isSelected ? UIColor(red: 0.12, green: 0.45, blue: 0.9, alpha: 1.0) : UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0)
-        let textColor: UIColor = isSelected ? .white : .black
+        let backgroundColor = isSelected ? UIColor(red: 0.12, green: 0.45, blue: 0.9, alpha: 1.0) : UIColor(red: 1, green: 1, blue: 1, alpha: 1.0)
+        let textColor: UIColor = isSelected ? .white : .systemBlue
         let tintColor: UIColor = isSelected ? .white : .systemBlue
         
         button.backgroundColor = backgroundColor
@@ -314,12 +317,53 @@ class recordViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return cell
     }
     
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        tableView.deselectRow(at: indexPath, animated: true)
+//        let record = filteredRecords[indexPath.row]
+//        print("Selected record: \(record.fileName)")
+//    }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        // Use the filtered array to get the record
         let record = filteredRecords[indexPath.row]
-        print("Selected record: \(record.fileName)")
+
+        // Ensure we have a file URL
+        guard let fileURL = record.fileURL else {
+            showConfirmationMessage(title: "File Error", message: "Document file path is unavailable.")
+            return
+        }
+
+        // 1. Gain Security Access (Critical for files picked via UIDocumentPicker)
+        let didStartAccessing = fileURL.startAccessingSecurityScopedResource()
+        
+        // 2. Initialize the Document Interaction Controller
+        documentInteractionController = UIDocumentInteractionController(url: fileURL)
+        documentInteractionController?.delegate = self
+        
+        // 3. Present the document preview menu
+        // We use the tapped cell's frame as the anchor for the presentation popover
+        if let cell = tableView.cellForRow(at: indexPath) {
+            documentInteractionController?.presentOptionsMenu(from: cell.frame, in: view, animated: true)
+        }
+
+        // 4. Stop access after presentation (you may need to extend this)
+        if didStartAccessing {
+            // NOTE: In production, you might delay stopping access until the user closes the viewer
+            fileURL.stopAccessingSecurityScopedResource()
+        }
     }
     
+    func showConfirmationMessage(title: String, message: String? = nil) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
+    
+    func documentInteractionControllerViewControllerForPreview(_ controller: UIDocumentInteractionController) -> UIViewController {
+        // HIG: Return self to host the document preview modally
+        return self
+    }
     // MARK: - UISearchBarDelegate
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
