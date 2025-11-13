@@ -13,7 +13,6 @@ class ChildProfilesCollectionViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var addButton: UIButton!
 
-    // Use the shared model type (defined in ChildDetails.swift)
     var profiles: [ChildDetails] = [
         ChildDetails(name: "", dob: "", gender: "", image: nil)
     ]
@@ -21,7 +20,6 @@ class ChildProfilesCollectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Register your custom cell XIB
         let nib = UINib(nibName: "ChildProfileCell", bundle: nil)
         collectionView.register(nib, forCellWithReuseIdentifier: "ChildProfileCell")
 
@@ -38,7 +36,6 @@ class ChildProfilesCollectionViewController: UIViewController {
         addButton.clipsToBounds = true
     }
 
-    // Present Add Profile screen (assumes nib or storyboard ID exists)
     @IBAction func addButtonTapped(_ sender: UIButton) {
         let addVC = AddChildProfileViewController(nibName: "AddChildProfileViewController", bundle: nil)
         addVC.delegate = self
@@ -46,8 +43,8 @@ class ChildProfilesCollectionViewController: UIViewController {
     }
 }
 
-// MARK: - Collection View Setup
-extension ChildProfilesCollectionViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+// MARK: - Collection View
+extension ChildProfilesCollectionViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ChildProfileCellDelegate {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return profiles.count
@@ -58,7 +55,6 @@ extension ChildProfilesCollectionViewController: UICollectionViewDataSource, UIC
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ChildProfileCell", for: indexPath) as! ChildProfileCell
         let model = profiles[indexPath.item]
 
-        // If profile is empty, show placeholder
         if model.name.isEmpty {
             cell.nameLabel.text = ""
             cell.childImageView.image = UIImage(systemName: "person.crop.circle.badge.plus")
@@ -66,6 +62,9 @@ extension ChildProfilesCollectionViewController: UICollectionViewDataSource, UIC
             cell.nameLabel.text = model.name
             cell.childImageView.image = model.image ?? UIImage(systemName: "person.circle.fill")
         }
+
+        // ✅ Assign delegate to handle image tap
+        cell.delegate = self
 
         return cell
     }
@@ -95,9 +94,39 @@ extension ChildProfilesCollectionViewController: UICollectionViewDataSource, UIC
             return CGSize(width: cellWidth, height: cellWidth)
         }
     }
+
+    // MARK: - ChildProfileCellDelegate
+    func didTapChildImage(in cell: ChildProfileCell) {
+        guard let indexPath = collectionView.indexPath(for: cell) else { return }
+        let selectedChild = profiles[indexPath.item]
+
+        // Navigate to HomeViewController
+//        if let homeVC = storyboard?.instantiateViewController(withIdentifier: "HomeViewController") as? HomeViewController {
+//            homeVC.selectedChild = selectedChild
+//            navigationController?.pushViewController(homeVC, animated: true)
+//        }
+        let storyboard = UIStoryboard(name: "tabBarStoryBoard", bundle: nil)
+            guard let mainTabBarController = storyboard.instantiateViewController(withIdentifier: "tabBarStoryBoardViewController") as? UITabBarController else {
+                fatalError("Could not instantiate tabBarStoryBoardViewController from storyboard.")
+            }
+
+            // b. Get the current key window
+            // This is the standard modern way to access the window in SceneDelegate-based apps
+            guard let window = view.window else { return }
+
+            // c. Set the new root view controller with an optional animation
+            window.rootViewController = mainTabBarController
+            
+            // Add a transition animation for a smoother look
+            UIView.transition(with: window,
+                              duration: 0.5,
+                              options: .transitionFlipFromLeft, // Choose your favorite animation!
+                              animations: nil,
+                              completion: nil)
+    }
 }
 
-// MARK: - Delegate from AddChildProfileViewController
+// MARK: - AddChildProfileDelegate
 extension ChildProfilesCollectionViewController: AddChildProfileDelegate {
     func didAddChildProfile(_ profile: ChildDetails) {
         if profiles.count == 1 && profiles[0].name.isEmpty {
