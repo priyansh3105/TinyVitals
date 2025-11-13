@@ -34,7 +34,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
-				"Login Screen/Image/Screenshot 2025-11-06 at 11.32.16 AM.png",
+				"Signup screen /Assets/Screenshot 2025-11-06 at 11.32.16 AM.png",
 			);
 			target = 1BB5331D2EBDEDAB0096BA8A /* TinyVitals */;
 		};
