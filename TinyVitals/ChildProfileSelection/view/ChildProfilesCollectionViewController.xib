@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ChildProfilesCollectionViewController" customModule="TinyVitals" customModuleProvider="target">
+            <connections>
+                <outlet property="addButton" destination="OGA-x1-VKL" id="den-2S-oXz"/>
+                <outlet property="collectionView" destination="UhM-5G-pgs" id="eAk-6Q-W3u"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select child profile" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XBk-oG-5f8">
+                    <rect key="frame" x="30" y="128" width="333" height="35"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="35" id="w9s-W7-FPY"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                    <color key="textColor" red="0.4392156862745098" green="0.61568627450980395" blue="0.8784313725490196" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="UhM-5G-pgs">
+                    <rect key="frame" x="20" y="283" width="353" height="271"/>
+                    <color key="backgroundColor" red="0.98039215686274506" green="0.94901960784313721" blue="0.99607843137254903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Vst-ja-RQv">
+                        <size key="itemSize" width="128" height="128"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                </collectionView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OGA-x1-VKL">
+                    <rect key="frame" x="166.66666666666666" y="634" width="60" height="60"/>
+                    <color key="backgroundColor" red="0.4392156862745098" green="0.61568627450980395" blue="0.8784313725490196" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="60" id="C35-dJ-hC1"/>
+                        <constraint firstAttribute="height" constant="60" id="mdC-Oh-Nzb"/>
+                    </constraints>
+                    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" image="person.badge.plus" catalog="system"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.cornerRadius" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="addButtonTapped:" destination="-1" eventType="touchUpInside" id="6G6-p6-kI6"/>
+                    </connections>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" red="0.98039215686274506" green="0.94901960784313721" blue="0.99607843137254903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="XBk-oG-5f8" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="B1x-j1-UGT"/>
+                <constraint firstItem="OGA-x1-VKL" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="JqK-Ix-iRA"/>
+                <constraint firstItem="UhM-5G-pgs" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="OHu-gw-eFq"/>
+                <constraint firstItem="OGA-x1-VKL" firstAttribute="top" secondItem="UhM-5G-pgs" secondAttribute="bottom" constant="80" id="Ssc-u3-z0y"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="UhM-5G-pgs" secondAttribute="bottom" constant="230" id="Xyl-jY-htM"/>
+                <constraint firstItem="UhM-5G-pgs" firstAttribute="top" secondItem="XBk-oG-5f8" secondAttribute="bottom" constant="120" id="gBf-c5-Ghm"/>
+                <constraint firstItem="XBk-oG-5f8" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="gPM-AX-3xW"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="UhM-5G-pgs" secondAttribute="trailing" constant="20" id="h11-7g-NkV"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="XBk-oG-5f8" secondAttribute="trailing" constant="30" id="qSS-F4-Ans"/>
+            </constraints>
+            <point key="canvasLocation" x="138" y="20"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="person.badge.plus" catalog="system" width="128" height="124"/>
+    </resources>
+</document>
