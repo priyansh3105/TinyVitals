@@ -21,6 +21,8 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func signInButtonTapped(_ sender: UIButton) {
+        let childProfileSelectionVC = ChildProfilesCollectionViewController(nibName: "ChildProfilesCollectionViewController", bundle: nil)
+                navigationController?.pushViewController(childProfileSelectionVC, animated: true)
 //        let tabBarVC = tabBarStoryBoardViewController(nibName: "tabBarStoryBoardViewController", bundle: nil)
 //                navigationController?.pushViewController(tabBarVC, animated: true)
             // 1. Authenticate user (e.g., call API, check credentials)
@@ -29,24 +31,24 @@ class LoginViewController: UIViewController {
             // 2. ONLY proceed if sign-in is successful:
 
             // a. Instantiate the Tab Bar Controller using its Storyboard ID
-            let storyboard = UIStoryboard(name: "tabBarStoryBoard", bundle: nil)
-            guard let mainTabBarController = storyboard.instantiateViewController(withIdentifier: "tabBarStoryBoardViewController") as? UITabBarController else {
-                fatalError("Could not instantiate tabBarStoryBoardViewController from storyboard.")
-            }
-
-            // b. Get the current key window
-            // This is the standard modern way to access the window in SceneDelegate-based apps
-            guard let window = view.window else { return }
-
-            // c. Set the new root view controller with an optional animation
-            window.rootViewController = mainTabBarController
-            
-            // Add a transition animation for a smoother look
-            UIView.transition(with: window,
-                              duration: 0.5,
-                              options: .transitionFlipFromLeft, // Choose your favorite animation!
-                              animations: nil,
-                              completion: nil)
+//            let storyboard = UIStoryboard(name: "tabBarStoryBoard", bundle: nil)
+//            guard let mainTabBarController = storyboard.instantiateViewController(withIdentifier: "tabBarStoryBoardViewController") as? UITabBarController else {
+//                fatalError("Could not instantiate tabBarStoryBoardViewController from storyboard.")
+//            }
+//
+//            // b. Get the current key window
+//            // This is the standard modern way to access the window in SceneDelegate-based apps
+//            guard let window = view.window else { return }
+//
+//            // c. Set the new root view controller with an optional animation
+//            window.rootViewController = mainTabBarController
+//            
+//            // Add a transition animation for a smoother look
+//            UIView.transition(with: window,
+//                              duration: 0.5,
+//                              options: .transitionFlipFromLeft, // Choose your favorite animation!
+//                              animations: nil,
+//                              completion: nil)
     }
 
      @IBAction func forgotPasswordButtonTapped(_ sender: UIButton) {
