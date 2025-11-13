@@ -735,10 +735,10 @@
             </objects>
             <point key="canvasLocation" x="2411.450381679389" y="1252.8169014084508"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Tab Bar Story Board View Controller-->
         <scene sceneID="Ydz-YV-9PO">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="K7n-LB-gzk" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="tabBarStoryBoardViewController" automaticallyAdjustsScrollViewInsets="NO" id="K7n-LB-gzk" customClass="tabBarStoryBoardViewController" customModule="TinyVitals" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="LEA-Tm-acL">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
