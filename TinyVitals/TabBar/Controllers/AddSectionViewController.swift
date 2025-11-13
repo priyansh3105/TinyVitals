@@ -21,7 +21,14 @@ class AddSectionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.title = "Add Section"
+        nameTextField.layer.borderColor = UIColor.systemBlue.cgColor
+        // 2. Set the Cancel Button (placed on the left side for dismissal)
+        // The selector links to the existing cancelButtonTapped method.
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Cancel",
+                                                            style: .plain,
+                                                            target: self,
+                                                            action: #selector(cancelButtonTapped))
         // Do any additional setup after loading the view.
     }
     

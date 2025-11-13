@@ -7,8 +7,15 @@
 
 import UIKit
 
-class RecordListCell: UITableViewCell {
+protocol RecordListCellDelegate: AnyObject {
+    // Passes the URL of the record that needs to be shared
+    func didTapShare(for record: Record)
+}
 
+class RecordListCell: UITableViewCell {
+    
+    weak var delegate: RecordListCellDelegate? // <<< New property
+    var currentRecord: Record? // <<< To hold the record data
     
     @IBOutlet weak var cardContainerView: UIView!
     @IBOutlet weak var recordTitleLabel: UILabel!
@@ -50,6 +57,7 @@ class RecordListCell: UITableViewCell {
     // MARK: - Configuration
     
     func configure(with record: Record) {
+        self.currentRecord = record
         recordTitleLabel.text = record.fileName
 //        recordTitleLabel.font = UIFont.boldSystemFont(ofSize: 15)
         
@@ -92,5 +100,11 @@ class RecordListCell: UITableViewCell {
         // Ensure selection style doesn't interfere with the card look
         // You might want to remove the default selection style in Storyboard/XIB.
     }
+    
+    @IBAction func shareButtonTapped(_ sender: Any) {
+        guard let record = currentRecord else { return }
+        delegate?.didTapShare(for: record) // Communicate back to the ViewController
+    }
+    
 
 }

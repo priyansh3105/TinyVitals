@@ -164,9 +164,34 @@ class recordViewController: UIViewController, UITableViewDelegate, UITableViewDa
     // MARK: - Actions & Delegate Implementations
     
     @IBAction func addSectionButtonTapped(_ sender: Any) {
+//        let addSectionVC = AddSectionViewController(nibName: "AddSectionViewController", bundle: nil)
+//        addSectionVC.delegate = self
+//        present(UINavigationController(rootViewController: addSectionVC), animated: true)
         let addSectionVC = AddSectionViewController(nibName: "AddSectionViewController", bundle: nil)
         addSectionVC.delegate = self
-        present(UINavigationController(rootViewController: addSectionVC), animated: true)
+        
+        // 1. Embed in Navigation Controller
+        let nav = UINavigationController(rootViewController: addSectionVC)
+        
+        // 2. Set the Modal Presentation Style
+        // This tells iOS to present it as a card/sheet, not fullscreen.
+        nav.modalPresentationStyle = .pageSheet // <<< CRITICAL STEP
+
+        // 3. Configure Sheet Presentation (iOS 15.0+ for half-screen control)
+        if #available(iOS 15.0, *) {
+            if let sheet = nav.sheetPresentationController {
+                // Set the sheet to the medium detent (which typically corresponds to half the screen height)
+                sheet.detents = [.medium()] // Use medium for half-screen
+                
+                // Optionally: Disable the large detent (full screen) if you only want half-screen
+                // sheet.largestUndimmedDetentIdentifier = .medium
+                
+                // Optionally: Set corner radius for a custom look
+                // sheet.preferredCornerRadius = 20
+            }
+        }
+        
+        present(nav, animated: true)
     }
     
     @IBAction func addDocumentTapped(_ sender: Any) {
@@ -317,11 +342,6 @@ class recordViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return cell
     }
     
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        tableView.deselectRow(at: indexPath, animated: true)
-//        let record = filteredRecords[indexPath.row]
-//        print("Selected record: \(record.fileName)")
-//    }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
