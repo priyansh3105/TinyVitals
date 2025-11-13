@@ -552,6 +552,9 @@
                                                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <state key="normal" title="Button"/>
                                                             <buttonConfiguration key="configuration" style="plain" image="square.and.arrow.up" catalog="system"/>
+                                                            <connections>
+                                                                <action selector="shareButtonTapped:" destination="3Vb-zH-1Ja" eventType="touchUpInside" id="aHk-j7-gGl"/>
+                                                            </connections>
                                                         </button>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.5" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="location.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="3IN-2l-hww">
                                                             <rect key="frame" x="90" y="48.666666666666664" width="20" height="18.666666666666679"/>

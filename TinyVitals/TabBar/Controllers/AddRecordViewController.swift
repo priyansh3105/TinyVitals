@@ -47,15 +47,29 @@ class AddRecordViewController: UIViewController, UIDocumentPickerDelegate, UIIma
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // 1. Setup Upload Area Tap Gesture
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(uploadAreaTapped))
-        uploadArea.addGestureRecognizer(tapGesture)
+        // 1. Setup Upload Area Tap Gesture (Existing)
+        let uploadTapGesture = UITapGestureRecognizer(target: self, action: #selector(uploadAreaTapped))
+        uploadArea.addGestureRecognizer(uploadTapGesture)
         
-        // 2. HIG: Ensure DatePicker mode is set to Date only (can also be done in XIB)
+        // 2. HIG: Ensure DatePicker mode is set to Date only (Existing)
         visitDate.datePickerMode = .date
         
-        // Optional: Add a "Done" button if presented in a Navigation Controller
+        // 3. Optional: Add a "Done" button (Existing)
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelButtonTapped))
+
+        // --- NEW CODE FOR KEYBOARD DISMISSAL ---
+        
+        // 4. Implement Tap-to-Dismiss Keyboard
+        let keyboardDismissTap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        
+        // Crucial: Allows taps to pass through to underlying controls (like the Add button)
+        // but still registers a general tap to dismiss the keyboard.
+        keyboardDismissTap.cancelsTouchesInView = false
+        
+        view.addGestureRecognizer(keyboardDismissTap)
+        
+        // Ensure you also set the title for the Nav Bar
+        self.title = "Add Record"
     }
 
     // MARK: - Actions
@@ -67,6 +81,12 @@ class AddRecordViewController: UIViewController, UIDocumentPickerDelegate, UIIma
     
     @objc func uploadAreaTapped() {
         showDocumentSourceOptions()
+    }
+    
+    @objc func dismissKeyboard() {
+        // This method tells the view (and all its subviews) to resign the first responder status,
+        // forcing the keyboard to dismiss.
+        view.endEditing(true)
     }
     
     @IBAction func addButtonTapped(_ sender: UIButton) {

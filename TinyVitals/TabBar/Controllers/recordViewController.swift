@@ -11,7 +11,7 @@ import UniformTypeIdentifiers
 import CoreGraphics
 import QuickLook
 
-class recordViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AddRecordDelegate, UISearchBarDelegate, AddSectionDelegate, UIDocumentInteractionControllerDelegate {
+class recordViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AddRecordDelegate, UISearchBarDelegate, AddSectionDelegate, UIDocumentInteractionControllerDelegate, RecordListCellDelegate {
     
     // MARK: - Outlets
     @IBOutlet var recordSuperView: UIView!
@@ -322,6 +322,7 @@ class recordViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         
         let record = filteredRecords[indexPath.row]
+        cell.delegate = self
         cell.configure(with: record)
         cell.setThumbnail(image: nil)
         
@@ -400,5 +401,41 @@ class recordViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
+    }
+    
+    func didTapShare(for record: Record) {
+        guard let fileURL = record.fileURL else {
+            showConfirmationMessage(title: "File Error", message: "Document file path is unavailable.")
+            return
+        }
+
+        // 1. Gain Security Access
+        // CRITICAL: Store the boolean result to know if we need to call stopAccessing() later.
+        let didStartAccessing = fileURL.startAccessingSecurityScopedResource()
+        
+        // 2. Prepare the items for sharing
+        let activityViewController = UIActivityViewController(
+            activityItems: [fileURL],
+            applicationActivities: nil
+        )
+        
+        // 3. Set the completion handler for cleanup
+        // This runs after the user dismisses the Share Sheet (whether they shared or canceled).
+        activityViewController.completionWithItemsHandler = { (activityType, completed, returnedItems, error) in
+            if didStartAccessing {
+                // Stop file access ONLY if access was successfully started in Step 1.
+                fileURL.stopAccessingSecurityScopedResource()
+            }
+        }
+        
+        // 4. Required for iPad (Anchor presentation)
+        if let popoverController = activityViewController.popoverPresentationController {
+            // Anchor the popover to the view center for simplicity
+            popoverController.sourceView = self.view
+            popoverController.sourceRect = CGRect(x: view.bounds.midX, y: view.bounds.midY, width: 0, height: 0)
+        }
+        
+        // 5. Present the Share Sheet
+        present(activityViewController, animated: true)
     }
 }
