@@ -7,7 +7,7 @@
 
 import UIKit
 
-class vaccinationViewController: UIViewController {
+class vaccinationViewController: UIViewController, EditVaccinationDelegate {
 
     @IBOutlet var vaccinationSuperView: UIView!
     @IBOutlet weak var tagScrollView: UIScrollView!
@@ -129,11 +129,15 @@ class vaccinationViewController: UIViewController {
             scopedVaccines = masterVaccineList.filter { $0.schedule.rawValue == selectedSchedule }
         }
         
-        // 2. Split the filtered list into the two section arrays
-        dueVaccines = scopedVaccines.filter { $0.status == .due }
+        // --- THIS IS THE FIX ---
+        
+        // 2. "Due" now includes anything that is NOT .completed
+        dueVaccines = scopedVaccines.filter { $0.status != .completed }
+        
+        // 3. "Completed" is only for .completed items
         completedVaccines = scopedVaccines.filter { $0.status == .completed }
         
-        // 3. Refresh the table
+        // 4. Refresh the table
         tableView.reloadData()
     }
 
@@ -142,70 +146,85 @@ class vaccinationViewController: UIViewController {
         masterVaccineList = [
             
             // --- Birth ---
-            // (Marked as completed in your photo)
-            Vaccine(name: "BCG", description: "Tuberculosis Vaccine", schedule: .atBirth, status: .completed),
-            Vaccine(name: "OPV 0", description: "Oral Polio Vaccine", schedule: .atBirth, status: .completed),
+            Vaccine(name: "BCG", description: "Tuberculosis Vaccine", schedule: .atBirth, status: .completed, notes: "Given at hospital", givenDate: Date(), photoData: nil),
+            Vaccine(name: "OPV 0", description: "Oral Polio Vaccine", schedule: .atBirth, status: .completed, notes: "Given at hospital", givenDate: Date(), photoData: nil),
             
             // --- 6 Weeks ---
-            // (DTwP 1 is marked as completed)
-            Vaccine(name: "DTwP 1", description: "Diphtheria, Tetanus, Pertussis", schedule: .sixWeeks, status: .completed),
-            Vaccine(name: "Hep-B 2", description: "Hepatitis B Vaccine", schedule: .sixWeeks, status: .due),
-            Vaccine(name: "IPV 1", description: "Inactivated Polio Vaccine", schedule: .sixWeeks, status: .due),
-            Vaccine(name: "Rota Virus 1", description: "Rotavirus Vaccine", schedule: .sixWeeks, status: .due),
-            Vaccine(name: "PCV 1", description: "Pneumococcal Conjugate Vaccine", schedule: .sixWeeks, status: .due),
+            Vaccine(name: "DTwP 1", description: "Diphtheria, Tetanus, Pertussis", schedule: .sixWeeks, status: .completed, notes: "Given on 1/1/25", givenDate: Date(), photoData: nil),
+            Vaccine(name: "Hep-B 2", description: "Hepatitis B Vaccine", schedule: .sixWeeks, status: .due, notes: nil, givenDate: nil, photoData: nil),
+            Vaccine(name: "IPV 1", description: "Inactivated Polio Vaccine", schedule: .sixWeeks, status: .due, notes: nil, givenDate: nil, photoData: nil),
+            Vaccine(name: "Rota Virus 1", description: "Rotavirus Vaccine", schedule: .sixWeeks, status: .due, notes: nil, givenDate: nil, photoData: nil),
+            Vaccine(name: "PCV 1", description: "Pneumococcal Conjugate Vaccine", schedule: .sixWeeks, status: .due, notes: nil, givenDate: nil, photoData: nil),
 
             // --- 10 Weeks ---
-            Vaccine(name: "DTwP 2", description: "Diphtheria, Tetanus, Pertussis", schedule: .tenWeeks, status: .due),
-            Vaccine(name: "IPV 2", description: "Inactivated Polio Vaccine", schedule: .tenWeeks, status: .due),
-            Vaccine(name: "Hib 2", description: "Haemophilus Influenzae Type B", schedule: .tenWeeks, status: .due),
-            Vaccine(name: "Rota Virus 2", description: "Rotavirus Vaccine", schedule: .tenWeeks, status: .due),
-            Vaccine(name: "PCV 2", description: "Pneumococcal Conjugate Vaccine", schedule: .tenWeeks, status: .due),
+            Vaccine(name: "DTwP 2", description: "Diphtheria, Tetanus, Pertussis", schedule: .tenWeeks, status: .due, notes: nil, givenDate: nil, photoData: nil),
+            Vaccine(name: "IPV 2", description: "Inactivated Polio Vaccine", schedule: .tenWeeks, status: .due, notes: nil, givenDate: nil, photoData: nil),
+            Vaccine(name: "Hib 2", description: "Haemophilus Influenzae Type B", schedule: .tenWeeks, status: .due, notes: nil, givenDate: nil, photoData: nil),
+            Vaccine(name: "Rota Virus 2", description: "Rotavirus Vaccine", schedule: .tenWeeks, status: .due, notes: nil, givenDate: nil, photoData: nil),
+            Vaccine(name: "PCV 2", description: "Pneumococcal Conjugate Vaccine", schedule: .tenWeeks, status: .due, notes: nil, givenDate: nil, photoData: nil),
 
             // --- 14 Weeks ---
-            Vaccine(name: "DTwP 3", description: "Diphtheria, Tetanus, Pertussis", schedule: .fourteenWeeks, status: .due),
-            Vaccine(name: "IPV 3", description: "Inactivated Polio Vaccine", schedule: .fourteenWeeks, status: .due),
-            Vaccine(name: "Hib 3", description: "Haemophilus Influenzae Type B", schedule: .fourteenWeeks, status: .due),
-            Vaccine(name: "Rota Virus 3", description: "Rotavirus Vaccine", schedule: .fourteenWeeks, status: .due),
-            Vaccine(name: "PCV 3", description: "Pneumococcal Conjugate Vaccine", schedule: .fourteenWeeks, status: .due),
+            Vaccine(name: "DTwP 3", description: "Diphtheria, Tetanus, Pertussis", schedule: .fourteenWeeks, status: .due, notes: nil, givenDate: nil, photoData: nil),
+            Vaccine(name: "IPV 3", description: "Inactivated Polio Vaccine", schedule: .fourteenWeeks, status: .due, notes: nil, givenDate: nil, photoData: nil),
+            Vaccine(name: "Hib 3", description: "Haemophilus Influenzae Type B", schedule: .fourteenWeeks, status: .due, notes: nil, givenDate: nil, photoData: nil),
+            Vaccine(name: "Rota Virus 3", description: "Rotavirus Vaccine", schedule: .fourteenWeeks, status: .due, notes: nil, givenDate: nil, photoData: nil),
+            Vaccine(name: "PCV 3", description: "Pneumococcal Conjugate Vaccine", schedule: .fourteenWeeks, status: .due, notes: nil, givenDate: nil, photoData: nil),
 
             // --- 6 Months ---
-            Vaccine(name: "OPV 1", description: "Oral Polio Vaccine", schedule: .sixMonths, status: .due),
-            Vaccine(name: "Hep-B 3", description: "Hepatitis B Vaccine", schedule: .sixMonths, status: .due),
+            Vaccine(name: "OPV 1", description: "Oral Polio Vaccine", schedule: .sixMonths, status: .due, notes: nil, givenDate: nil, photoData: nil),
+            Vaccine(name: "Hep-B 3", description: "Hepatitis B Vaccine", schedule: .sixMonths, status: .due, notes: nil, givenDate: nil, photoData: nil),
 
             // --- 9 Months ---
-            Vaccine(name: "OPV 2", description: "Oral Polio Vaccine", schedule: .nineMonths, status: .due),
-            Vaccine(name: "MMR-1", description: "Mumps, Measles, Rubella", schedule: .nineMonths, status: .due),
+            Vaccine(name: "OPV 2", description: "Oral Polio Vaccine", schedule: .nineMonths, status: .due, notes: nil, givenDate: nil, photoData: nil),
+            Vaccine(name: "MMR-1", description: "Mumps, Measles, Rubella", schedule: .nineMonths, status: .due, notes: nil, givenDate: nil, photoData: nil),
             
             // --- 12 Months ---
-            Vaccine(name: "Typhoid", description: "Typhoid Conjugate Vaccine", schedule: .twelveMonths, status: .due),
-            Vaccine(name: "Hep-A 1", description: "Hepatitis A Vaccine", schedule: .twelveMonths, status: .due),
+            Vaccine(name: "Typhoid", description: "Typhoid Conjugate Vaccine", schedule: .twelveMonths, status: .due, notes: nil, givenDate: nil, photoData: nil),
+            Vaccine(name: "Hep-A 1", description: "Hepatitis A Vaccine", schedule: .twelveMonths, status: .due, notes: nil, givenDate: nil, photoData: nil),
 
             // --- 15 Months ---
-            Vaccine(name: "MMR 2", description: "Mumps, Measles, Rubella", schedule: .fifteenMonths, status: .due),
-            Vaccine(name: "Varicella 1", description: "Chickenpox Vaccine", schedule: .fifteenMonths, status: .due),
-            Vaccine(name: "PCV Booster", description: "Pneumococcal Conjugate Vaccine", schedule: .fifteenMonths, status: .due),
+            Vaccine(name: "MMR 2", description: "Mumps, Measles, Rubella", schedule: .fifteenMonths, status: .due, notes: nil, givenDate: nil, photoData: nil),
+            Vaccine(name: "Varicella 1", description: "Chickenpox Vaccine", schedule: .fifteenMonths, status: .due, notes: nil, givenDate: nil, photoData: nil),
+            Vaccine(name: "PCV Booster", description: "Pneumococcal Conjugate Vaccine", schedule: .fifteenMonths, status: .due, notes: nil, givenDate: nil, photoData: nil),
             
             // --- 18 Months ---
-            Vaccine(name: "DTaP B1 / DTwP B1", description: "Diphtheria, Tetanus, Pertussis", schedule: .eighteenMonths, status: .due),
-            Vaccine(name: "OPV 3 / IPV B1", description: "Polio Vaccine", schedule: .eighteenMonths, status: .due),
-            Vaccine(name: "Hib B1", description: "Haemophilus Influenzae Type B", schedule: .eighteenMonths, status: .due),
-            Vaccine(name: "Hep-A 2", description: "Hepatitis A Vaccine", schedule: .eighteenMonths, status: .due),
+            Vaccine(name: "DTaP B1 / DTwP B1", description: "Diphtheria, Tetanus, Pertussis", schedule: .eighteenMonths, status: .due, notes: nil, givenDate: nil, photoData: nil),
+            Vaccine(name: "OPV 3 / IPV B1", description: "Polio Vaccine", schedule: .eighteenMonths, status: .due, notes: nil, givenDate: nil, photoData: nil),
+            Vaccine(name: "Hib B1", description: "Haemophilus Influenzae Type B", schedule: .eighteenMonths, status: .due, notes: nil, givenDate: nil, photoData: nil),
+            Vaccine(name: "Hep-A 2", description: "Hepatitis A Vaccine", schedule: .eighteenMonths, status: .due, notes: nil, givenDate: nil, photoData: nil),
 
             // --- 2 Years ---
-            Vaccine(name: "Typhoid Booster", description: "Typhoid Vaccine", schedule: .twoYears, status: .due),
+            Vaccine(name: "Typhoid Booster", description: "Typhoid Vaccine", schedule: .twoYears, status: .due, notes: nil, givenDate: nil, photoData: nil),
             
             // --- 4-6 Years ---
-            Vaccine(name: "DTaP B2 / DTwP B2", description: "Diphtheria, Tetanus, Pertussis", schedule: .fourToSixYears, status: .due),
-            Vaccine(name: "OPV 3", description: "Oral Polio Vaccine", schedule: .fourToSixYears, status: .due),
-            Vaccine(name: "Varicella 2", description: "Chickenpox Vaccine", schedule: .fourToSixYears, status: .due),
+            Vaccine(name: "DTaP B2 / DTwP B2", description: "Diphtheria, Tetanus, Pertussis", schedule: .fourToSixYears, status: .due, notes: nil, givenDate: nil, photoData: nil),
+            Vaccine(name: "OPV 3", description: "Oral Polio Vaccine", schedule: .fourToSixYears, status: .due, notes: nil, givenDate: nil, photoData: nil),
+            Vaccine(name: "Varicella 2", description: "Chickenpox Vaccine", schedule: .fourToSixYears, status: .due, notes: nil, givenDate: nil, photoData: nil),
 
             // --- 10-12 Years ---
-            Vaccine(name: "Tdap / Td", description: "Tetanus, Diphtheria, Pertussis", schedule: .tenToTwelveYears, status: .due),
-            Vaccine(name: "HPV", description: "Human Papillomavirus Vaccine", schedule: .tenToTwelveYears, status: .due)
+            Vaccine(name: "Tdap / Td", description: "Tetanus, Diphtheria, Pertussis", schedule: .tenToTwelveYears, status: .due, notes: nil, givenDate: nil, photoData: nil),
+            Vaccine(name: "HPV", description: "Human Papillomavirus Vaccine", schedule: .tenToTwelveYears, status: .due, notes: nil, givenDate: nil, photoData: nil)
         ]
         
         // Run the filter on launch to populate the list
         filterVaccines()
+    }
+    
+    
+    func didUpdateVaccine(_ updatedVaccine: Vaccine) {
+        
+        // 1. Find the original vaccine in the master list using its name
+        if let index = masterVaccineList.firstIndex(where: { $0.name == updatedVaccine.name }) {
+            
+            // 2. Replace it with the updated version
+            masterVaccineList[index] = updatedVaccine
+            
+            // 3. Re-filter and reload the table to show the change
+            // This will automatically move the item from "Due" to "Completed"
+            filterVaccines()
+        } else {
+            print("Error: Could not find matching vaccine to update.")
+        }
     }
 }
 
@@ -299,6 +318,25 @@ extension vaccinationViewController: UITableViewDelegate {
     // Handle taps to see vaccine details
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        // Navigate to a detail view
+        
+        // 1. Get the selected vaccine
+        let selectedVaccine: Vaccine
+        if indexPath.section == 0 {
+            selectedVaccine = dueVaccines[indexPath.row]
+        } else {
+            selectedVaccine = completedVaccines[indexPath.row]
+        }
+        
+        // 2. Create the detail VC
+        let detailVC = EditVaccinationLogViewController(nibName: "EditVaccinationLogViewController", bundle: nil)
+        
+        // 3. Pass the data
+        detailVC.vaccine = selectedVaccine
+        
+        // 4. <<< CRITICAL: SET THE DELEGATE >>>
+        detailVC.delegate = self
+        
+        // 5. Push it onto the navigation stack
+        self.navigationController?.pushViewController(detailVC, animated: true)
     }
 }

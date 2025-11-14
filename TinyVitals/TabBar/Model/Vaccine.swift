@@ -24,6 +24,8 @@ enum VaccinationSchedule: String, CaseIterable {
 enum VaccinationStatus {
     case due
     case completed
+    case skipped
+    case reschedule
 }
 
 struct Vaccine {
@@ -31,5 +33,8 @@ struct Vaccine {
     let description: String
     let schedule: VaccinationSchedule
     let status: VaccinationStatus
+    let notes: String?
+    let givenDate: Date?
+    let photoData: Data? // <<< ADD THIS PROPERTY
 }
 
