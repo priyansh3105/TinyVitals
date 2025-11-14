@@ -3,6 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -496,7 +497,7 @@
                                 </connections>
                             </searchBar>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1bv-1n-PRC">
-                                <rect key="frame" x="0.0" y="212" width="393" height="45"/>
+                                <rect key="frame" x="8" y="212" width="378" height="45"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="R5I-j5-wyZ">
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="45"/>
@@ -687,7 +688,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="H1m-O6-cg2"/>
-                        <color key="backgroundColor" systemColor="systemGrayColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="pnF-GS-A8H">
                         <rightBarButtonItems>
@@ -705,7 +705,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gAu-fY-lGO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2411.450381679389" y="568.30985915492965"/>
+            <point key="canvasLocation" x="2409.9236641221373" y="568.30985915492965"/>
         </scene>
         <!--Vaccination View Controller-->
         <scene sceneID="6P1-SD-xMf">
@@ -714,8 +714,108 @@
                     <view key="view" contentMode="scaleToFill" id="T4Z-rL-kdP">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eha-YO-pCb">
+                                <rect key="frame" x="9" y="162" width="375" height="50"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="FNx-mp-xxJ">
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="50"/>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="FNx-mp-xxJ" firstAttribute="bottom" secondItem="sox-A1-Xnm" secondAttribute="bottom" id="41d-DH-ttd"/>
+                                    <constraint firstItem="FNx-mp-xxJ" firstAttribute="height" secondItem="Eha-YO-pCb" secondAttribute="height" id="6e8-ei-lm6"/>
+                                    <constraint firstItem="FNx-mp-xxJ" firstAttribute="leading" secondItem="sox-A1-Xnm" secondAttribute="leading" id="VYa-gb-a6Z"/>
+                                    <constraint firstAttribute="height" constant="50" id="VuG-ae-t3t"/>
+                                    <constraint firstItem="FNx-mp-xxJ" firstAttribute="top" secondItem="sox-A1-Xnm" secondAttribute="top" id="bJS-uL-DcA"/>
+                                    <constraint firstItem="FNx-mp-xxJ" firstAttribute="trailing" secondItem="sox-A1-Xnm" secondAttribute="trailing" id="r6y-gI-zE2"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="sox-A1-Xnm"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="uaG-M7-AfR"/>
+                            </scrollView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="lz8-5p-8eJ">
+                                <rect key="frame" x="0.0" y="212" width="393" height="523"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="VaccineCell" id="pJg-pu-o1d" customClass="VaccineCell" customModule="TinyVitals" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="50" width="393" height="75"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pJg-pu-o1d" id="7eA-T4-hCE">
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="75"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="63b-9a-Dk2">
+                                                    <rect key="frame" x="10" y="5" width="373" height="65"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vaccine Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="awK-lS-kM5">
+                                                            <rect key="frame" x="10" y="13.666666666666668" width="92" height="18"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vaccine Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nmi-aF-YPX">
+                                                            <rect key="frame" x="10" y="36.666666666666664" width="121" height="16"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e2B-Nn-GGO">
+                                                            <rect key="frame" x="346" y="15" width="17" height="35"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="17" id="h42-Dz-vKh"/>
+                                                            </constraints>
+                                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <state key="normal" title="Button"/>
+                                                            <buttonConfiguration key="configuration" style="plain">
+                                                                <imageReference key="image" image="chevron.right" catalog="system" symbolScale="medium"/>
+                                                            </buttonConfiguration>
+                                                        </button>
+                                                    </subviews>
+                                                    <color key="backgroundColor" red="0.30980392159999998" green="0.5568627451" blue="0.87843137250000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstItem="awK-lS-kM5" firstAttribute="leading" secondItem="63b-9a-Dk2" secondAttribute="leading" constant="10" id="3oa-pB-3c7"/>
+                                                        <constraint firstItem="nmi-aF-YPX" firstAttribute="top" secondItem="awK-lS-kM5" secondAttribute="bottom" constant="5" id="RoH-h1-QtI"/>
+                                                        <constraint firstAttribute="trailing" secondItem="e2B-Nn-GGO" secondAttribute="trailing" constant="10" id="VGQ-Sa-y8t"/>
+                                                        <constraint firstItem="nmi-aF-YPX" firstAttribute="leading" secondItem="63b-9a-Dk2" secondAttribute="leading" constant="10" id="c3o-db-iWG"/>
+                                                        <constraint firstAttribute="height" constant="65" id="hvz-Yz-y4X"/>
+                                                        <constraint firstItem="awK-lS-kM5" firstAttribute="centerY" secondItem="63b-9a-Dk2" secondAttribute="centerY" constant="-10" id="lJ1-Bu-h9d"/>
+                                                        <constraint firstItem="e2B-Nn-GGO" firstAttribute="centerY" secondItem="63b-9a-Dk2" secondAttribute="centerY" id="tpY-T2-gFA"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="20"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.clipsToBounds" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="63b-9a-Dk2" firstAttribute="leading" secondItem="7eA-T4-hCE" secondAttribute="leading" constant="10" id="3oI-zw-dqy"/>
+                                                <constraint firstItem="63b-9a-Dk2" firstAttribute="top" secondItem="7eA-T4-hCE" secondAttribute="top" constant="5" id="OBD-ZD-chF"/>
+                                                <constraint firstAttribute="bottom" secondItem="63b-9a-Dk2" secondAttribute="bottom" constant="5" id="dh7-Wn-oRo"/>
+                                                <constraint firstAttribute="trailing" secondItem="63b-9a-Dk2" secondAttribute="trailing" constant="10" id="odw-0O-M5R"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="containerView" destination="63b-9a-Dk2" id="TyC-Th-qL7"/>
+                                            <outlet property="subtitleLabel" destination="nmi-aF-YPX" id="o2N-dL-Xad"/>
+                                            <outlet property="titleLabel" destination="awK-lS-kM5" id="hZq-V8-OjS"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="rsr-io-lBs"/>
-                        <color key="backgroundColor" systemColor="systemIndigoColor"/>
+                        <constraints>
+                            <constraint firstItem="lz8-5p-8eJ" firstAttribute="top" secondItem="Eha-YO-pCb" secondAttribute="bottom" id="35N-J3-Q5h"/>
+                            <constraint firstItem="lz8-5p-8eJ" firstAttribute="trailing" secondItem="rsr-io-lBs" secondAttribute="trailing" id="AtL-qD-Ioj"/>
+                            <constraint firstItem="lz8-5p-8eJ" firstAttribute="leading" secondItem="rsr-io-lBs" secondAttribute="leading" id="CEN-td-hWA"/>
+                            <constraint firstItem="Eha-YO-pCb" firstAttribute="top" secondItem="rsr-io-lBs" secondAttribute="top" id="FVE-JS-2eO"/>
+                            <constraint firstItem="rsr-io-lBs" firstAttribute="trailing" secondItem="Eha-YO-pCb" secondAttribute="trailing" constant="10" id="LU0-yh-2RJ"/>
+                            <constraint firstItem="lz8-5p-8eJ" firstAttribute="bottom" secondItem="rsr-io-lBs" secondAttribute="bottom" id="fcj-HW-DOZ"/>
+                            <constraint firstItem="Eha-YO-pCb" firstAttribute="leading" secondItem="rsr-io-lBs" secondAttribute="leading" constant="10" id="wxl-QS-dNI"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="xWS-4E-vAs">
                         <rightBarButtonItems>
@@ -728,12 +828,15 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="tableView" destination="lz8-5p-8eJ" id="XEB-9S-pl6"/>
+                        <outlet property="tagScrollView" destination="Eha-YO-pCb" id="5o6-eZ-1Sh"/>
+                        <outlet property="tagStackView" destination="FNx-mp-xxJ" id="dIh-hQ-fR4"/>
                         <outlet property="vaccinationSuperView" destination="T4Z-rL-kdP" id="yce-Nn-Ati"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H1a-nP-v63" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2411.450381679389" y="1252.8169014084508"/>
+            <point key="canvasLocation" x="2409.9236641221373" y="1252.8169014084508"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Ydz-YV-9PO">
@@ -835,6 +938,7 @@
     </scenes>
     <resources>
         <image name="Image" width="626" height="626"/>
+        <image name="chevron.right" catalog="system" width="97" height="128"/>
         <image name="cross.case" catalog="system" width="128" height="100"/>
         <image name="cross.case.fill" catalog="system" width="128" height="100"/>
         <image name="document.badge.plus" catalog="system" width="116" height="128"/>
@@ -849,12 +953,6 @@
         <image name="syringe.fill" catalog="system" width="128" height="115"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGrayColor">
-            <color red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemIndigoColor">
-            <color red="0.34509803919999998" green="0.33725490200000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
