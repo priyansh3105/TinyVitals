@@ -30,11 +30,12 @@ enum VaccinationStatus {
 
 struct Vaccine {
     let name: String
-    let description: String
+    let fullName: String
+    let longDescription: String
     let schedule: VaccinationSchedule
     let status: VaccinationStatus
     let notes: String?
     let givenDate: Date?
-    let photoData: Data? // <<< ADD THIS PROPERTY
+    let photoData: Data?
 }
 

@@ -30,7 +30,7 @@ class VaccineCell: UITableViewCell {
     
     func configure(with vaccine: Vaccine) {
         titleLabel.text = vaccine.name
-        subtitleLabel.text = vaccine.description
+        subtitleLabel.text = vaccine.fullName // <<< USE fullName HERE
     }
 
 }
