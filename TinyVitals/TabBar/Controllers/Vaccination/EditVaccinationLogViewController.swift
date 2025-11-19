@@ -22,7 +22,6 @@ class EditVaccinationLogViewController: UIViewController, UITextViewDelegate, UI
     @IBOutlet weak var addPhotoView: UIView!
     @IBOutlet weak var photoPreviewImageView: UIImageView!
     
-    @IBOutlet weak var removePhotoButton: UIButton!
     
     // MARK: - Properties
     var selectedPhotoData: Data?
@@ -50,13 +49,24 @@ class EditVaccinationLogViewController: UIViewController, UITextViewDelegate, UI
         // --- Setup Note Text View ---
         noteTextView.delegate = self // Set the delegate for placeholder logic
         
+        // --- Setup Photo Taps ---
+        
+        // 1. Add tap gesture to the "Add Photo" view
+        let photoTap = UITapGestureRecognizer(target: self, action: #selector(addPhotoTapped))
+        addPhotoView.addGestureRecognizer(photoTap)
+
+        // 2. Add tap gesture to the "Photo Preview" image view (for QuickLook)
         let previewTap = UITapGestureRecognizer(target: self, action: #selector(photoPreviewTapped))
         photoPreviewImageView.isUserInteractionEnabled = true // Must be enabled for taps
         photoPreviewImageView.addGestureRecognizer(previewTap)
 
+        // 3. Add Long Press gesture for Deletion
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(photoLongPressed(_:)))
+        photoPreviewImageView.addGestureRecognizer(longPressGesture)
+
         // --- Populate Data ---
         if let vaccine = vaccine {
-            self.title = "Vaccination Log" // Set Nav Bar title if you want it specific
+            self.title = "Vaccination Log" // Set Nav Bar title
             nameLabel.text = vaccine.name
             descriptionLabel.text = vaccine.longDescription
             
@@ -73,7 +83,7 @@ class EditVaccinationLogViewController: UIViewController, UITextViewDelegate, UI
                 noteTextView.textColor = .black
             } else {
                 noteTextView.text = "Add a note"
-                noteTextView.textColor = .black // Use lightGray for placeholder
+                noteTextView.textColor = .lightGray // Use lightGray for placeholder
             }
             
             // Load saved photo
@@ -83,20 +93,17 @@ class EditVaccinationLogViewController: UIViewController, UITextViewDelegate, UI
                 // Show preview, hide "Add" button
                 self.photoPreviewImageView.isHidden = false
                 self.addPhotoView.isHidden = true
-                self.removePhotoButton.isHidden = false // <<< Show remove button
             } else {
                 // Show "Add" button, hide preview
                 self.photoPreviewImageView.isHidden = true
                 self.addPhotoView.isHidden = false
-                self.removePhotoButton.isHidden = true // <<< Hide remove button
             }
         } else {
             // Default state if no vaccine is passed (e.g., for placeholder)
             noteTextView.text = "Add a note"
-            noteTextView.textColor = .black
+            noteTextView.textColor = .lightGray
             photoPreviewImageView.isHidden = true
             addPhotoView.isHidden = false
-            self.removePhotoButton.isHidden = true // <<< Hide remove button
         }
         
         // Set the initial visual state for buttons and date picker
@@ -104,19 +111,6 @@ class EditVaccinationLogViewController: UIViewController, UITextViewDelegate, UI
     }
     
     // MARK: - Status Button Actions
-    
-    @IBAction func removePhotoButtonTapped(_ sender: UIButton) {
-        self.selectedPhotoData = nil
-        
-        // Animate the UI change
-        UIView.animate(withDuration: 0.3) {
-            self.photoPreviewImageView.image = nil
-            self.photoPreviewImageView.isHidden = true
-            self.removePhotoButton.isHidden = true // Hide the remove button
-            self.addPhotoView.isHidden = false    // Show the "Add Photo" button again
-        }
-    }
-    
     
     @IBAction func takenButtonTapped(_ sender: UIButton) {
         selectedStatus = .completed
@@ -135,13 +129,10 @@ class EditVaccinationLogViewController: UIViewController, UITextViewDelegate, UI
     
     func handleImageSelected(data: Data) {
         self.selectedPhotoData = data
-        
-        // Animate the UI change
         UIView.animate(withDuration: 0.3) {
             self.photoPreviewImageView.image = UIImage(data: data)
             self.photoPreviewImageView.isHidden = false
-            self.removePhotoButton.isHidden = false // <<< Show remove button
-            self.addPhotoView.isHidden = true // Hide the "Add Photo" button
+            self.addPhotoView.isHidden = true
         }
     }
     
@@ -209,7 +200,7 @@ class EditVaccinationLogViewController: UIViewController, UITextViewDelegate, UI
     @IBAction func saveButtonTapped(_ sender: UIButton) {
         guard let originalVaccine = vaccine else { return }
             
-        let newNotes = (noteTextView.textColor == .black) ? nil : noteTextView.text
+        let newNotes = (noteTextView.textColor == .lightGray) ? nil : noteTextView.text
         let newDate = datePicker.date
             
         let updatedVaccine = Vaccine(
@@ -275,6 +266,41 @@ class EditVaccinationLogViewController: UIViewController, UITextViewDelegate, UI
         self.present(previewController, animated: true)
     }
     
+    // MARK: - Photo Actions
+
+    @objc func photoLongPressed(_ gesture: UILongPressGestureRecognizer) {
+        // Only trigger once when the press begins
+        guard gesture.state == .began else { return }
+        
+        // Show confirmation alert
+        let alert = UIAlertController(title: "Delete Photo", message: "Are you sure you want to remove this photo?", preferredStyle: .actionSheet)
+        
+        alert.addAction(UIAlertAction(title: "Delete Photo", style: .destructive, handler: { [weak self] _ in
+            self?.removePhoto()
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        
+        // For iPad
+        if let popover = alert.popoverPresentationController {
+            popover.sourceView = photoPreviewImageView
+            popover.sourceRect = photoPreviewImageView.bounds
+        }
+        
+        present(alert, animated: true)
+    }
+
+    // Helper function to reset the UI
+    func removePhoto() {
+        self.selectedPhotoData = nil
+        
+        UIView.animate(withDuration: 0.3) {
+            self.photoPreviewImageView.image = nil
+            self.photoPreviewImageView.isHidden = true
+            self.addPhotoView.isHidden = false // Show the "Add Photo" button
+        }
+    }
+    
     func presentDocumentPicker() {
         // Allows selecting any image type
         let picker = UIDocumentPickerViewController(forOpeningContentTypes: [.image], asCopy: true)
@@ -327,7 +353,7 @@ extension EditVaccinationLogViewController {
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.isEmpty {
             textView.text = "Add a note"
-            textView.textColor = .black
+            textView.textColor = .lightGray
         }
     }
 }

@@ -16,7 +16,6 @@
                 <outlet property="nameLabel" destination="kgN-gb-puW" id="6Xq-3K-iBe"/>
                 <outlet property="noteTextView" destination="vMR-Oy-sK6" id="B7X-lz-Dzf"/>
                 <outlet property="photoPreviewImageView" destination="SUE-pQ-pil" id="DHj-1E-xCs"/>
-                <outlet property="removePhotoButton" destination="nuc-5R-up2" id="SST-1C-0Eh"/>
                 <outlet property="rescheduleButton" destination="x67-64-ZmT" id="nHr-do-dg5"/>
                 <outlet property="saveButton" destination="G6r-Zs-uYH" id="yAK-60-32c"/>
                 <outlet property="skippedButton" destination="QBH-wa-pK1" id="gAn-PE-94n"/>
@@ -298,25 +297,12 @@
                                                 <constraint firstAttribute="width" constant="150" id="U1k-Yg-09e"/>
                                             </constraints>
                                         </imageView>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nuc-5R-up2">
-                                            <rect key="frame" x="144" y="-12" width="30" height="27"/>
-                                            <color key="tintColor" red="1" green="0.13392851184224652" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                            <state key="normal" title="Button"/>
-                                            <buttonConfiguration key="configuration" style="plain" image="xmark.circle.fill" catalog="system"/>
-                                            <connections>
-                                                <action selector="removePhotoButtonTapped:" destination="-1" eventType="touchUpInside" id="Kb9-cf-iFi"/>
-                                            </connections>
-                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="SUE-pQ-pil" secondAttribute="bottom" id="3lG-nU-Pd9"/>
-                                        <constraint firstAttribute="bottom" secondItem="nuc-5R-up2" secondAttribute="bottom" constant="113" id="D0y-mw-dhb"/>
                                         <constraint firstItem="SUE-pQ-pil" firstAttribute="leading" secondItem="d26-Hr-tuc" secondAttribute="leading" constant="10" id="U7A-G3-OZk"/>
-                                        <constraint firstItem="nuc-5R-up2" firstAttribute="top" secondItem="d26-Hr-tuc" secondAttribute="top" constant="-12" id="a4S-iL-8go"/>
                                         <constraint firstAttribute="height" constant="128" id="aWg-gi-T8s"/>
-                                        <constraint firstAttribute="trailing" secondItem="nuc-5R-up2" secondAttribute="trailing" constant="219" id="bu9-xu-9PZ"/>
-                                        <constraint firstItem="nuc-5R-up2" firstAttribute="leading" secondItem="d26-Hr-tuc" secondAttribute="leading" constant="144" id="qgQ-he-mDi"/>
                                         <constraint firstItem="SUE-pQ-pil" firstAttribute="top" secondItem="d26-Hr-tuc" secondAttribute="top" id="rM8-Iv-8Ra"/>
                                     </constraints>
                                 </view>
@@ -374,7 +360,6 @@
     </objects>
     <resources>
         <image name="plus.app" catalog="system" width="128" height="114"/>
-        <image name="xmark.circle.fill" catalog="system" width="128" height="123"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
