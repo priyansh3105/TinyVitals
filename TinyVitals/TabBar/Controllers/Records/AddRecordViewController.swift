@@ -7,10 +7,9 @@
 
 import UIKit
 import MobileCoreServices
-import UniformTypeIdentifiers // Required for UTType
+import UniformTypeIdentifiers
 import CoreGraphics
 
-// Delegate Protocol (Unchanged)
 protocol AddRecordDelegate: AnyObject {
     func didAddRecord(_ record: Record)
 }
@@ -20,62 +19,57 @@ class AddRecordViewController: UIViewController, UIDocumentPickerDelegate, UIIma
     // MARK: - Outlets
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var clinicTextField: UITextField!
-    @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var uploadArea: UIView!
-    
-    // CRITICAL CHANGE: The date input is now a direct UIDatePicker outlet
-    @IBOutlet weak var visitDate: UIDatePicker! // <<< Now correctly linked
-    
+    @IBOutlet weak var visitDate: UIDatePicker!
     @IBOutlet weak var filePreviewImageView: UIImageView!
+    @IBOutlet weak var dummyImageView: UIImageView!
     
-    var targetSectionName: String = "All"
     // MARK: - Properties
+    var targetSectionName: String = "All"
     weak var delegate: AddRecordDelegate?
     var selectedFileURL: URL?
     var selectedFileType: String = "N/A"
     
-    // Date Formatter (Used only for display/logging if needed, but not for input parsing)
     let displayDateFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        // Use a standard format for consistency, e.g., "dd MMM yyyy"
         formatter.dateFormat = "dd MMM yyyy"
         return formatter
     }()
+    
+    @IBOutlet weak var selectedSectionLabel: UILabel!
+    @IBOutlet weak var sectionSelectionView: UIView!
+    var selectedSectionName: String = "All"
+    var availableSections: [String] = []
+    var selectedPreviewData: Data?
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // 1. Setup Upload Area Tap Gesture (Existing)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel",
+                                                                style: .plain,
+                                                                target: self,
+                                                                action: #selector(cancelButtonTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add",
+                                                            style: .done,
+                                                            target: self,
+                                                            action: #selector(addButtonTapped))
+        selectedSectionName = targetSectionName
+        selectedSectionLabel.text = targetSectionName
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(selectSectionTapped))
+        sectionSelectionView.addGestureRecognizer(tapGesture)
         let uploadTapGesture = UITapGestureRecognizer(target: self, action: #selector(uploadAreaTapped))
         uploadArea.addGestureRecognizer(uploadTapGesture)
-        
-        // 2. HIG: Ensure DatePicker mode is set to Date only (Existing)
         visitDate.datePickerMode = .date
-        
-        // 3. Optional: Add a "Done" button (Existing)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelButtonTapped))
-
-        // --- NEW CODE FOR KEYBOARD DISMISSAL ---
-        
-        // 4. Implement Tap-to-Dismiss Keyboard
         let keyboardDismissTap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        
-        // Crucial: Allows taps to pass through to underlying controls (like the Add button)
-        // but still registers a general tap to dismiss the keyboard.
         keyboardDismissTap.cancelsTouchesInView = false
-        
         view.addGestureRecognizer(keyboardDismissTap)
-        
-        // Ensure you also set the title for the Nav Bar
         self.title = "Add Record"
     }
 
     // MARK: - Actions
 
     @objc func cancelButtonTapped() {
-        // Dismiss the modal stack if the user taps "Done" without saving
         dismiss(animated: true, completion: nil)
     }
     
@@ -84,17 +78,14 @@ class AddRecordViewController: UIViewController, UIDocumentPickerDelegate, UIIma
     }
     
     @objc func dismissKeyboard() {
-        // This method tells the view (and all its subviews) to resign the first responder status,
-        // forcing the keyboard to dismiss.
         view.endEditing(true)
     }
     
-    @IBAction func addButtonTapped(_ sender: UIButton) {
+    @objc func addButtonTapped() {
         
-        // 1. Collect and validate data (no change needed here)
         guard let title = titleTextField.text, !title.isEmpty,
               let clinic = clinicTextField.text, !clinic.isEmpty,
-              let fileURL = selectedFileURL // Check if a file was selected
+              let fileURL = selectedFileURL
         else {
             showConfirmationMessage(title: "Missing Information", message: "Please fill Title, Clinic, and upload a file.")
             return
@@ -102,21 +93,24 @@ class AddRecordViewController: UIViewController, UIDocumentPickerDelegate, UIIma
         
         let addedDate = visitDate.date
         
-        // 3. Create the new Record object (CRITICALLY UPDATED)
+        let finalSection = self.selectedSectionName == "All" ? self.targetSectionName : self.selectedSectionName
+        
         let newRecord = Record(
             fileName: title,
             source: clinic,
             addedDate: addedDate,
             type: selectedFileType,
             fileURL: fileURL,
-            sectionName: targetSectionName // <<< INCLUDE THE SECTION NAME HERE
+            sectionName: finalSection,
+            previewData: selectedPreviewData
         )
         
-        // 4. Send the new record back to the presenting view controller
         delegate?.didAddRecord(newRecord)
-        
-        // 5. Dismiss the modal screen
         dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func selectSectionTapped() {
+        presentSectionPicker()
     }
     
     // MARK: - Document/Image Picker Flow
@@ -155,48 +149,48 @@ class AddRecordViewController: UIViewController, UIDocumentPickerDelegate, UIIma
         guard let url = urls.first else {
             controller.dismiss(animated: true); return
         }
-        
         _ = url.startAccessingSecurityScopedResource()
         selectedFileURL = url
         selectedFileType = url.pathExtension.uppercased()
-        
-        // 2. Generate Thumbnail on Background Thread (HIG: Responsiveness)
         controller.dismiss(animated: true) {
             DispatchQueue.global(qos: .userInitiated).async {
+                var thumbnailImage: UIImage?
                 let type = self.selectedFileType
-                var thumbnail: UIImage?
-                
                 if type == "PDF" {
-                    thumbnail = self.generateThumbnailFromPDF(url: url)
-                } else if ["IMAGE", "JPG", "PNG"].contains(type) {
-                    thumbnail = self.generateThumbnailFromImage(url: url)
+                    thumbnailImage = self.generateThumbnailFromPDF(url: url)
+                } else {
+                    thumbnailImage = self.generateThumbnailFromImage(url: url)
                 }
-                
-                // 3. Update UI on Main Thread
+                let thumbData = thumbnailImage?.jpegData(compressionQuality: 0.7)
                 DispatchQueue.main.async {
-                    self.filePreviewImageView.image = thumbnail
-                    self.filePreviewImageView.contentMode = .scaleAspectFit
+                    self.selectedPreviewData = thumbData
+                    self.filePreviewImageView.image = thumbnailImage
+                    self.filePreviewImageView.contentMode = .scaleAspectFill
                     self.filePreviewImageView.clipsToBounds = true
+                    self.dummyImageView.image = nil
                 }
             }
         }
     }
+
     
     // MARK: - UIImagePickerControllerDelegate (Simplified for brevity)
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true) {
-            // ... (Simulated save logic to get temp URL) ...
-            guard let tempURL = URL(string: "/simulated/temp/path") else { return }
-            self.selectedFileURL = tempURL
-            self.selectedFileType = "IMAGE"
-            
-            // Generate and display the thumbnail from the image data immediately
-            if let originalImage = info[.originalImage] as? UIImage {
-                self.filePreviewImageView.image = originalImage
-                self.filePreviewImageView.contentMode = .scaleAspectFit
-                self.filePreviewImageView.clipsToBounds = true
+            guard let originalImage = info[.originalImage] as? UIImage else { return }
+            let size = CGSize(width: 200, height: 200)
+            let renderer = UIGraphicsImageRenderer(size: size)
+            let img = renderer.image { _ in
+                originalImage.draw(in: CGRect(origin: .zero, size: size))
             }
+            let thumbData = img.jpegData(compressionQuality: 0.7)
+            self.selectedFileURL = nil
+            self.selectedFileType = "IMAGE"
+            self.selectedPreviewData = thumbData
+            self.filePreviewImageView.image = img
+            self.filePreviewImageView.contentMode = .scaleAspectFill
+            self.filePreviewImageView.clipsToBounds = true
         }
     }
 
@@ -209,7 +203,6 @@ class AddRecordViewController: UIViewController, UIDocumentPickerDelegate, UIIma
     }
     
     func generateThumbnailFromImage(url: URL) -> UIImage? {
-        // Note: The logic here ensures the image is scaled and centered to 50x50
         guard let data = try? Data(contentsOf: url),
               let fullImage = UIImage(data: data) else { return nil }
         
@@ -237,7 +230,6 @@ class AddRecordViewController: UIViewController, UIDocumentPickerDelegate, UIIma
             UIRectFill(CGRect(origin: .zero, size: targetSize))
             fullImage.draw(in: CGRect(origin: origin, size: scaledImageSize))
         }
-        
         return thumbnail
     }
     func generateThumbnailFromPDF(url: URL) -> UIImage? {
@@ -268,7 +260,47 @@ class AddRecordViewController: UIViewController, UIDocumentPickerDelegate, UIIma
             
             context.cgContext.drawPDFPage(page)
         }
-        
         return thumbnail
+    }
+}
+
+extension AddRecordViewController: UIPickerViewDataSource, UIPickerViewDelegate {
+    
+    func presentSectionPicker() {
+        let alert = UIAlertController(title: "Select Category", message: "\n\n\n\n\n\n\n\n\n", preferredStyle: .actionSheet)
+        let picker = UIPickerView(frame: CGRect(x: 60, y: 50, width: 270, height: 150))
+        
+        picker.dataSource = self
+        picker.delegate = self
+        picker.tag = 1
+        
+        alert.view.addSubview(picker)
+        
+        let saveAction = UIAlertAction(title: "Confirm", style: .default) { [weak self] _ in
+            guard let self = self else { return }
+            
+            let selectedRow = picker.selectedRow(inComponent: 0)
+            let chosenSection = self.availableSections[selectedRow]
+            
+            self.selectedSectionName = chosenSection
+            self.selectedSectionLabel.text = chosenSection
+        }
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        alert.addAction(saveAction)
+        
+        present(alert, animated: true)
+    }
+
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return availableSections.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return availableSections[row]
     }
 }

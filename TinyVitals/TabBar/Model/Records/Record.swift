@@ -14,4 +14,5 @@ struct Record {
     let type: String
     let fileURL: URL?
     let sectionName: String
+    var previewData: Data?
 }

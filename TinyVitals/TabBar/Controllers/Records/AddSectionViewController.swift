@@ -8,8 +8,8 @@
 import UIKit
 
 protocol AddSectionDelegate: AnyObject {
-    // This method will be called when the user hits 'Add' on the modal screen
     func didAddSection(name: String)
+    func didEditSection(oldName: String, newName: String)
 }
 
 class AddSectionViewController: UIViewController {
@@ -17,38 +17,44 @@ class AddSectionViewController: UIViewController {
     weak var delegate: AddSectionDelegate?
     @IBOutlet weak var nameTextField: UITextField!
     
-    @IBOutlet weak var addButton: UIButton!
+    var currentSectionName: String?
+    var isEditingMode: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Add Section"
-        nameTextField.layer.borderColor = UIColor.systemBlue.cgColor
-        // 2. Set the Cancel Button (placed on the left side for dismissal)
-        // The selector links to the existing cancelButtonTapped method.
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Cancel",
+        self.title = isEditingMode ? "Edit Section" : "Add Section"
+        
+        if isEditingMode, let name = currentSectionName {
+            nameTextField.text = name
+        }
+        let buttonTitle = isEditingMode ? "Save" : "Add"
+                navigationItem.rightBarButtonItem = UIBarButtonItem(
+                    title: buttonTitle,
+                    style: .done,
+                    target: self,
+                    action: #selector(finalAddButtonTapped)
+                )
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel",
                                                             style: .plain,
                                                             target: self,
                                                             action: #selector(cancelButtonTapped))
-        // Do any additional setup after loading the view.
     }
     
-    @IBAction func finalAddButtonTapped(_ sender: Any) {
-        // 1. Validate input
-        guard let sectionName = nameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines), !sectionName.isEmpty else {
+    @objc func finalAddButtonTapped(_ sender: Any) {
+        guard let newName = nameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines), !newName.isEmpty else {
             showConfirmationMessage(title: "Required", message: "Please enter a name for the new section.")
             return
         }
-        
-        // 2. Delegate the new name back to the recordViewController
-        // This calls the didAddSection(name:) method in the main view controller.
-        delegate?.didAddSection(name: sectionName)
-        
-        // 3. Dismiss the modal screen (The main VC will refresh the tags after this returns)
+
+        if isEditingMode, let oldName = currentSectionName {
+            delegate?.didEditSection(oldName: oldName, newName: newName)
+        } else {
+            delegate?.didAddSection(name: newName)
+        }
         dismiss(animated: true, completion: nil)
     }
     
     @objc func cancelButtonTapped() {
-        // Simply dismiss the modal presentation
         dismiss(animated: true, completion: nil)
     }
     
