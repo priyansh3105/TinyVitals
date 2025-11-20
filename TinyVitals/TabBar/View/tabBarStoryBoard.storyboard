@@ -32,7 +32,7 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DJa-OC-Abe">
                                                                 <rect key="frame" x="0.0" y="0.0" width="373" height="122"/>
                                                                 <subviews>
-                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="Zkb-Fd-0AG">
+                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ChildPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="Zkb-Fd-0AG">
                                                                         <rect key="frame" x="263" y="10" width="100" height="100"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="100" id="8ky-Rz-LOw"/>
@@ -1042,10 +1042,10 @@
             </objects>
             <point key="canvasLocation" x="2409.9236641221373" y="1252.8169014084508"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Tab Bar Story Board View Controller-->
         <scene sceneID="Ydz-YV-9PO">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="K7n-LB-gzk" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="tabBarStoryBoardViewController" automaticallyAdjustsScrollViewInsets="NO" id="K7n-LB-gzk" customClass="tabBarStoryBoardViewController" customModule="TinyVitals" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="LEA-Tm-acL">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
@@ -1141,7 +1141,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Image" width="626" height="626"/>
+        <image name="ChildPhoto" width="740" height="740"/>
         <image name="calendar.badge.clock" catalog="system" width="128" height="109"/>
         <image name="chevron.right" catalog="system" width="97" height="128"/>
         <image name="cross.case" catalog="system" width="128" height="100"/>
