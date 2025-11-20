@@ -56,29 +56,45 @@ class RecordListCell: UITableViewCell {
     
     // MARK: - Configuration
     
+//    func configure(with record: Record) {
+//        self.currentRecord = record
+//        recordTitleLabel.text = record.fileName
+////        recordTitleLabel.font = UIFont.boldSystemFont(ofSize: 15)
+//        
+//        // HIG: Use a contrasting color for the source text
+//        clinicLabel.text = record.source
+////        clinicLabel.textColor = .secondaryLabel
+//        
+//        // Set up the location icon
+////        locationIconView.image = UIImage(systemName: "mappin.circle.fill")
+////        locationIconView.tintColor = .systemGray
+//        
+//        // Format the date for the label
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "MMM dd yyyy" // Use desired format (e.g., 25th Aug 2025)
+//
+//        dateLabel.text = "Visited \(dateFormatter.string(from: record.addedDate))"
+//        dateLabel.font = UIFont.systemFont(ofSize: 15) // Use a smaller font size
+////        dateLabel.textColor = .systemGray
+//        
+//        // ... (rest of the thumbnail placeholder logic remains the same) ...
+//    }
     func configure(with record: Record) {
-        self.currentRecord = record
+        currentRecord = record
         recordTitleLabel.text = record.fileName
-//        recordTitleLabel.font = UIFont.boldSystemFont(ofSize: 15)
-        
-        // HIG: Use a contrasting color for the source text
         clinicLabel.text = record.source
-//        clinicLabel.textColor = .secondaryLabel
-        
-        // Set up the location icon
-//        locationIconView.image = UIImage(systemName: "mappin.circle.fill")
-//        locationIconView.tintColor = .systemGray
-        
-        // Format the date for the label
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMM dd yyyy" // Use desired format (e.g., 25th Aug 2025)
+        let df = DateFormatter()
+        df.dateFormat = "MMM dd yyyy"
+        dateLabel.text = "Visited \(df.string(from: record.addedDate))"
 
-        dateLabel.text = "Visited \(dateFormatter.string(from: record.addedDate))"
-        dateLabel.font = UIFont.systemFont(ofSize: 15) // Use a smaller font size
-//        dateLabel.textColor = .systemGray
-        
-        // ... (rest of the thumbnail placeholder logic remains the same) ...
+        if let data = record.previewData, let img = UIImage(data: data) {
+            setThumbnail(image: img)
+        } else {
+            setThumbnail(image: UIImage(named: "sample medical report image"))
+        }
     }
+
+
     
     // 2. NEW FUNCTION: Used by the ViewController to deliver the final image
     func setThumbnail(image: UIImage?) {

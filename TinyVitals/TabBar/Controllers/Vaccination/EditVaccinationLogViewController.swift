@@ -83,7 +83,7 @@ class EditVaccinationLogViewController: UIViewController, UITextViewDelegate, UI
                 noteTextView.textColor = .black
             } else {
                 noteTextView.text = "Add a note"
-                noteTextView.textColor = .lightGray // Use lightGray for placeholder
+                noteTextView.textColor = .black // Use lightGray for placeholder
             }
             
             // Load saved photo
@@ -101,7 +101,7 @@ class EditVaccinationLogViewController: UIViewController, UITextViewDelegate, UI
         } else {
             // Default state if no vaccine is passed (e.g., for placeholder)
             noteTextView.text = "Add a note"
-            noteTextView.textColor = .lightGray
+            noteTextView.textColor = .lightText
             photoPreviewImageView.isHidden = true
             addPhotoView.isHidden = false
         }

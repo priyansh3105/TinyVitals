@@ -35,20 +35,14 @@ class recordViewController: UIViewController, UITableViewDelegate, UITableViewDa
     override func viewDidLoad() {
         super.viewDidLoad()
         setupGradient()
-        
-        // Setup Order: Style -> Table/Search -> Load Data -> Build Custom UI
         setupSearchBarAppearance()
         setupTableViews()
-        
-        // CRITICAL: Call the tag setup to build the filter bar
         setupSectionTags()
-        
         loadSampleData()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        // Ensure size and circularity are enforced for the Floating Action Button
         let desiredSize: CGFloat = 60.0
         let cornerRadius: CGFloat = 25.0
         
@@ -77,7 +71,6 @@ class recordViewController: UIViewController, UITableViewDelegate, UITableViewDa
         searchBar.delegate = self
         searchBar.backgroundImage = UIImage()
         searchBar.backgroundColor = .clear
-        
         if #available(iOS 13.0, *) {
             let searchField = searchBar.searchTextField
             searchField.backgroundColor = .white
@@ -98,52 +91,41 @@ class recordViewController: UIViewController, UITableViewDelegate, UITableViewDa
     // MARK: - Tag View Builder Logic (ScrollView/StackView)
     
     func setupSectionTags() {
-        // 1. Clear all existing buttons before rebuilding
         tagStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-        
-        // 2. Iterate through all sections to create buttons
         for sectionName in allSections {
             let isAddButton = (sectionName == "+")
             let isSelected = (sectionName == selectedSection)
-            
             let button = createTagButton(title: sectionName, isAddButton: isAddButton, isSelected: isSelected)
-            
-            // Add button to the stack view
             tagStackView.addArrangedSubview(button)
         }
     }
     
     private func createTagButton(title: String, isAddButton: Bool, isSelected: Bool) -> UIButton {
         let button = UIButton(type: .custom)
-        
-        // Set Title/Image
         if isAddButton {
             button.setImage(UIImage(systemName: "plus"), for: .normal)
             button.setTitle(nil, for: .normal)
         } else {
             button.setTitle(title, for: .normal)
         }
-
-        // Styling (Pill Shape)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 12, weight: .medium)
         button.contentEdgeInsets = UIEdgeInsets(top: 8, left: 10, bottom: 8, right: 10)
-        button.layer.cornerRadius = 14 // Half of a 36pt effective button height
+        button.layer.cornerRadius = 14
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor(red: 0.12, green: 0.45, blue: 0.9, alpha: 1.0).cgColor
-        // Color Logic
         let backgroundColor = isSelected ? UIColor(red: 0.12, green: 0.45, blue: 0.9, alpha: 1.0) : UIColor(red: 1, green: 1, blue: 1, alpha: 1.0)
         let textColor: UIColor = isSelected ? .white : .systemBlue
         let tintColor: UIColor = isSelected ? .white : .systemBlue
-        
         button.backgroundColor = backgroundColor
         button.setTitleColor(textColor, for: .normal)
         button.tintColor = tintColor
-        
-        // Tagging (Use the section name as the identifier string)
         button.accessibilityIdentifier = title
-        
-        // Action Connection
         button.addTarget(self, action: #selector(tagButtonTapped(_:)), for: .touchUpInside)
+        if !isAddButton && title != "All" {
+            let longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(gesture:)))
+            longPress.minimumPressDuration = 0.5 // Standard iOS long press duration
+            button.addGestureRecognizer(longPress)
+        }
         
         return button
     }
@@ -152,7 +134,6 @@ class recordViewController: UIViewController, UITableViewDelegate, UITableViewDa
         guard let selectedName = sender.accessibilityIdentifier else { return }
 
         if selectedName == "+" {
-            // FIX: The action is now correctly defined and called here
             self.addSectionButtonTapped(sender as Any)
         } else {
             selectedSection = selectedName
@@ -164,33 +145,19 @@ class recordViewController: UIViewController, UITableViewDelegate, UITableViewDa
     // MARK: - Actions & Delegate Implementations
     
     @IBAction func addSectionButtonTapped(_ sender: Any) {
-//        let addSectionVC = AddSectionViewController(nibName: "AddSectionViewController", bundle: nil)
-//        addSectionVC.delegate = self
-//        present(UINavigationController(rootViewController: addSectionVC), animated: true)
         let addSectionVC = AddSectionViewController(nibName: "AddSectionViewController", bundle: nil)
         addSectionVC.delegate = self
-        
-        // 1. Embed in Navigation Controller
         let nav = UINavigationController(rootViewController: addSectionVC)
-        
-        // 2. Set the Modal Presentation Style
-        // This tells iOS to present it as a card/sheet, not fullscreen.
-        nav.modalPresentationStyle = .pageSheet // <<< CRITICAL STEP
-
-        // 3. Configure Sheet Presentation (iOS 15.0+ for half-screen control)
+        nav.modalPresentationStyle = .pageSheet
         if #available(iOS 15.0, *) {
             if let sheet = nav.sheetPresentationController {
-                // Set the sheet to the medium detent (which typically corresponds to half the screen height)
-                sheet.detents = [.medium()] // Use medium for half-screen
-                
-                // Optionally: Disable the large detent (full screen) if you only want half-screen
-                // sheet.largestUndimmedDetentIdentifier = .medium
-                
-                // Optionally: Set corner radius for a custom look
-                // sheet.preferredCornerRadius = 20
+                let smallDetent = UISheetPresentationController.Detent.custom { context in
+                    return 300
+                }
+                sheet.detents = [smallDetent]
+                sheet.largestUndimmedDetentIdentifier = smallDetent.identifier
             }
         }
-        
         present(nav, animated: true)
     }
     
@@ -198,28 +165,89 @@ class recordViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let addVC = AddRecordViewController(nibName: "AddRecordViewController", bundle: nil)
         addVC.delegate = self
         addVC.targetSectionName = self.selectedSection
+        addVC.availableSections = self.allSections.filter { $0 != "+" && $0 != "All" }
         let nav = UINavigationController(rootViewController: addVC)
+        nav.modalPresentationStyle = .pageSheet
+        if #available(iOS 15.0, *) {
+            if let sheet = nav.sheetPresentationController {
+                let customFixedDetent = UISheetPresentationController.Detent.custom { context in
+                    return 600
+                }
+                sheet.detents = [customFixedDetent]
+                sheet.preferredCornerRadius = 16
+            }
+        }
+
+        present(nav, animated: true)
+    }
+    
+    @objc func handleLongPress(gesture: UILongPressGestureRecognizer) {
+        guard gesture.state == .began else { return }
+        guard let button = gesture.view as? UIButton,
+              let sectionToEdit = button.accessibilityIdentifier else { return }
+        presentAddSection(sectionToEdit: sectionToEdit)
+    }
+
+    func presentAddSection(sectionToEdit: String? = nil) {
+        let addSectionVC = AddSectionViewController(nibName: "AddSectionViewController", bundle: nil)
+        addSectionVC.delegate = self
+
+        if let sectionName = sectionToEdit {
+            addSectionVC.currentSectionName = sectionName
+            addSectionVC.isEditingMode = true
+        }
+
+        let nav = UINavigationController(rootViewController: addSectionVC)
+        nav.modalPresentationStyle = .pageSheet
+        if #available(iOS 15.0, *) {
+            if let sheet = nav.sheetPresentationController {
+                let customFixedDetent = UISheetPresentationController.Detent.custom { context in
+                    return 300
+                }
+                sheet.detents = [customFixedDetent]
+                sheet.largestUndimmedDetentIdentifier = customFixedDetent.identifier
+                sheet.prefersGrabberVisible = true
+            }
+        }
         present(nav, animated: true)
     }
     
     func didAddSection(name: String) {
-        // 1. Insert new section before the "+" button
         if let plusIndex = allSections.lastIndex(of: "+") {
             allSections.insert(name, at: plusIndex)
         } else {
-            allSections.append(name) // Should only happen if '+' is missing
+            allSections.append(name)
         }
-        
-        // 2. Set the new section as selected and rebuild the UI
         selectedSection = name
-        setupSectionTags() // <<< This function clears the StackView and rebuilds all buttons
-        
-        // 3. Filter the table view to show the empty content for the new section
+        setupSectionTags()
         filterRecords()
     }
     
     func didAddRecord(_ record: Record) {
         records.insert(record, at: 0)
+        filterRecords()
+    }
+    
+    func didEditSection(oldName: String, newName: String) {
+        if let index = allSections.firstIndex(of: oldName) {
+            allSections[index] = newName
+        }
+        for i in 0..<records.count {
+            if records[i].sectionName == oldName {
+                let updatedRecord = Record(
+                    fileName: records[i].fileName,
+                    source: records[i].source,
+                    addedDate: records[i].addedDate,
+                    type: records[i].type,
+                    fileURL: records[i].fileURL,
+                    sectionName: newName,
+                    previewData: records[i].previewData
+                )
+                records[i] = updatedRecord
+            }
+        }
+        selectedSection = newName
+        setupSectionTags()
         filterRecords()
     }
     
@@ -246,15 +274,42 @@ class recordViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func loadSampleData() {
-        let pdfURL = Bundle.main.url(forResource: "SamplePDF", withExtension: "pdf") ?? URL(fileURLWithPath: "/simulated/missing/path.pdf")
-        let imageURL = Bundle.main.url(forResource: "SampleImage", withExtension: "jpg") ?? URL(fileURLWithPath: "/simulated/missing/path.jpg")
-        
+        let pdfData = UIImage(named: "DummyPDF")?.jpegData(compressionQuality: 1.0)
+        let xrayData = UIImage(named: "DummyXRay")?.jpegData(compressionQuality: 1.0)
+        let tempDir = FileManager.default.temporaryDirectory
+        let pdfUrl = tempDir.appendingPathComponent("CT_Chest_Scan.pdf")
+        let xrayUrl = tempDir.appendingPathComponent("XRay_Left_Leg.jpg")
+        try? pdfData?.write(to: pdfUrl)
+        try? xrayData?.write(to: xrayUrl)
         records = [
-            Record(fileName: "CT-Chest Scan", source: "Dr. Raj Kumar's Clinic", addedDate: Date().addingTimeInterval(-100000), type: "PDF", fileURL: pdfURL, sectionName: "Prescription"),
-            Record(fileName: "Blood Test Report (CBC)", source: "Apollo Diagnostics", addedDate: Date().addingTimeInterval(-200000), type: "PDF", fileURL: pdfURL, sectionName: "Prescription"),
-            Record(fileName: "X-Ray - Left Leg", source: "MedLife Imaging Center", addedDate: Date().addingTimeInterval(-300000), type: "Image", fileURL: imageURL, sectionName: "X-Ray"),
+            Record(
+                fileName: "CT-Chest Scan",
+                source: "Dr. Raj Kumar's Clinic",
+                addedDate: Date().addingTimeInterval(-100000),
+                type: "PDF",
+                fileURL: pdfUrl,
+                sectionName: "Prescription",
+                previewData: pdfData
+            ),
+            Record(
+                fileName: "Blood Test Report (CBC)",
+                source: "Apollo Diagnostics",
+                addedDate: Date().addingTimeInterval(-200000),
+                type: "PDF",
+                fileURL: pdfUrl,
+                sectionName: "Prescription",
+                previewData: pdfData
+            ),
+            Record(
+                fileName: "X-Ray - Left Leg",
+                source: "MedLife Imaging Center",
+                addedDate: Date().addingTimeInterval(-300000),
+                type: "Image",
+                fileURL: xrayUrl,
+                sectionName: "X-Ray",
+                previewData: xrayData
+            )
         ]
-        
         filterRecords()
     }
     
@@ -320,57 +375,53 @@ class recordViewController: UIViewController, UITableViewDelegate, UITableViewDa
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "RecordListCell", for: indexPath) as? RecordListCell else {
             fatalError("Unable to dequeue RecordListCell.")
         }
-        
-        let record = filteredRecords[indexPath.row]
+        var record = filteredRecords[indexPath.row]
         cell.delegate = self
         cell.configure(with: record)
         cell.setThumbnail(image: nil)
-        
-        // HIG: Start thumbnail generation on a background thread
-        if let fileURL = record.fileURL {
+        if let data = record.previewData, let img = UIImage(data: data) {
+            cell.setThumbnail(image: img)
+        } else if let fileURL = record.fileURL {
             DispatchQueue.global(qos: .userInitiated).async {
-                let thumbnail: UIImage? = record.type.uppercased() == "PDF" ?
-                                         self.generateThumbnailFromPDF(url: fileURL) :
-                                         self.generateThumbnailFromImage(url: fileURL)
-                
+                let thumbnail: UIImage? = record.type.uppercased() == "PDF"
+                    ? self.generateThumbnailFromPDF(url: fileURL)
+                    : self.generateThumbnailFromImage(url: fileURL)
+
+                let thumbData = thumbnail?.jpegData(compressionQuality: 0.7)
+
                 DispatchQueue.main.async {
                     if tableView.indexPath(for: cell) == indexPath {
-                        cell.setThumbnail(image: thumbnail)
+                        cell.setThumbnail(image: thumbnail ?? UIImage(named: "medical report sample image"))
+                    }
+
+                    if let data = thumbData {
+                        if let globalIndex = self.records.firstIndex(where: { $0.addedDate == record.addedDate && $0.fileName == record.fileName }) {
+                            self.records[globalIndex].previewData = data
+                        }
+                        self.filteredRecords[indexPath.row].previewData = data
                     }
                 }
             }
+        } else {
+            cell.setThumbnail(image: UIImage(named: "medical report sample image"))
         }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
-        // Use the filtered array to get the record
         let record = filteredRecords[indexPath.row]
-
-        // Ensure we have a file URL
         guard let fileURL = record.fileURL else {
             showConfirmationMessage(title: "File Error", message: "Document file path is unavailable.")
             return
         }
-
-        // 1. Gain Security Access (Critical for files picked via UIDocumentPicker)
         let didStartAccessing = fileURL.startAccessingSecurityScopedResource()
-        
-        // 2. Initialize the Document Interaction Controller
         documentInteractionController = UIDocumentInteractionController(url: fileURL)
         documentInteractionController?.delegate = self
-        
-        // 3. Present the document preview menu
-        // We use the tapped cell's frame as the anchor for the presentation popover
         if let cell = tableView.cellForRow(at: indexPath) {
             documentInteractionController?.presentOptionsMenu(from: cell.frame, in: view, animated: true)
         }
-
-        // 4. Stop access after presentation (you may need to extend this)
         if didStartAccessing {
-            // NOTE: In production, you might delay stopping access until the user closes the viewer
             fileURL.stopAccessingSecurityScopedResource()
         }
     }
@@ -382,7 +433,6 @@ class recordViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func documentInteractionControllerViewControllerForPreview(_ controller: UIDocumentInteractionController) -> UIViewController {
-        // HIG: Return self to host the document preview modally
         return self
     }
     // MARK: - UISearchBarDelegate
@@ -408,34 +458,20 @@ class recordViewController: UIViewController, UITableViewDelegate, UITableViewDa
             showConfirmationMessage(title: "File Error", message: "Document file path is unavailable.")
             return
         }
-
-        // 1. Gain Security Access
-        // CRITICAL: Store the boolean result to know if we need to call stopAccessing() later.
         let didStartAccessing = fileURL.startAccessingSecurityScopedResource()
-        
-        // 2. Prepare the items for sharing
         let activityViewController = UIActivityViewController(
             activityItems: [fileURL],
             applicationActivities: nil
         )
-        
-        // 3. Set the completion handler for cleanup
-        // This runs after the user dismisses the Share Sheet (whether they shared or canceled).
         activityViewController.completionWithItemsHandler = { (activityType, completed, returnedItems, error) in
             if didStartAccessing {
-                // Stop file access ONLY if access was successfully started in Step 1.
                 fileURL.stopAccessingSecurityScopedResource()
             }
         }
-        
-        // 4. Required for iPad (Anchor presentation)
         if let popoverController = activityViewController.popoverPresentationController {
-            // Anchor the popover to the view center for simplicity
             popoverController.sourceView = self.view
             popoverController.sourceRect = CGRect(x: view.bounds.midX, y: view.bounds.midY, width: 0, height: 0)
         }
-        
-        // 5. Present the Share Sheet
         present(activityViewController, animated: true)
     }
 }
