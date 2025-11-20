@@ -89,7 +89,6 @@ class SymptomDetailViewController: UIViewController, LogSymptomsDelegate {
     }
     
     @objc func doneTapped() {
-        // Dismiss the modal view
         self.dismiss(animated: true, completion: nil)
     }
     

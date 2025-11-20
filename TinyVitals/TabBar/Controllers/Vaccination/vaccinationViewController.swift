@@ -17,28 +17,22 @@ class vaccinationViewController: UIViewController, EditVaccinationDelegate {
     
     // MARK: - Data Properties
     let sectionTitles = ["Due", "Completed"]
-    var masterVaccineList: [Vaccine] = [] // Holds ALL vaccines
+    var masterVaccineList: [Vaccine] = []
     
-    // Arrays to power the sectioned table view
     var dueVaccines: [Vaccine] = []
     var completedVaccines: [Vaccine] = []
     
-    // Data source for the filter tags
     var allSchedules: [String] = ["All"] + VaccinationSchedule.allCases.map { $0.rawValue }
     var selectedSchedule: String = "All"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupGradient()
-        
-        // CRITICAL: Set the delegates for the table view
         tableView.dataSource = self
         tableView.delegate = self
         tableView.backgroundView = nil
         tableView.backgroundColor = .clear
-        // Build the horizontal filter tags
         setupSectionTags()
-        
         loadSampleVaccines()
     }
     
@@ -56,62 +50,43 @@ class vaccinationViewController: UIViewController, EditVaccinationDelegate {
     // MARK: - Tag/Filter Logic
     
     func setupSectionTags() {
-        // 1. Clear all existing buttons before rebuilding
         tagStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-        
-        // 2. Iterate through all sections to create buttons
         for sectionName in allSchedules {
-            // Note: This screen doesn't have a dynamic "+" button
             let isAddButton = false
             let isSelected = (sectionName == selectedSchedule)
-            
             let button = createTagButton(title: sectionName, isAddButton: isAddButton, isSelected: isSelected)
-            
-            // Add button to the stack view
             tagStackView.addArrangedSubview(button)
         }
     }
     
     private func createTagButton(title: String, isAddButton: Bool, isSelected: Bool) -> UIButton {
         let button = UIButton(type: .custom)
-        
-        // Set Title/Image
         if isAddButton {
             button.setImage(UIImage(systemName: "plus"), for: .normal)
             button.setTitle(nil, for: .normal)
         } else {
             button.setTitle(title, for: .normal)
         }
-
-        // Styling (Pill Shape)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 12, weight: .medium)
         button.contentEdgeInsets = UIEdgeInsets(top: 8, left: 10, bottom: 8, right: 10)
-        button.layer.cornerRadius = 14 // Half of a 36pt effective button height
+        button.layer.cornerRadius = 14
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor(red: 0.12, green: 0.45, blue: 0.9, alpha: 1.0).cgColor
         
-        // Color Logic
         let backgroundColor = isSelected ? UIColor(red: 0.12, green: 0.45, blue: 0.9, alpha: 1.0) : UIColor(red: 1, green: 1, blue: 1, alpha: 1.0)
         let textColor: UIColor = isSelected ? .white : .systemBlue
         let tintColor: UIColor = isSelected ? .white : .systemBlue
-        
         button.backgroundColor = backgroundColor
         button.setTitleColor(textColor, for: .normal)
         button.tintColor = tintColor
-        
-        // Tagging (Use the section name as the identifier string)
         button.accessibilityIdentifier = title
-        
-        // Action Connection
         button.addTarget(self, action: #selector(tagButtonTapped(_:)), for: .touchUpInside)
-        
+
         return button
     }
     
     @objc func tagButtonTapped(_ sender: UIButton) {
         guard let selectedName = sender.accessibilityIdentifier else { return }
-
-        // This view doesn't add sections, so we just filter
         selectedSchedule = selectedName
         setupSectionTags()
         filterVaccines()
@@ -121,32 +96,15 @@ class vaccinationViewController: UIViewController, EditVaccinationDelegate {
     
     func filterVaccines() {
         var scopedVaccines: [Vaccine]
-        
-        // 1. Filter by the selected schedule tag
         if selectedSchedule == "All" {
             scopedVaccines = masterVaccineList
         } else {
             scopedVaccines = masterVaccineList.filter { $0.schedule.rawValue == selectedSchedule }
         }
-        
-        // --- THIS IS THE FIX ---
-        
-        // 2. "Due" now includes anything that is NOT .completed
         dueVaccines = scopedVaccines.filter { $0.status != .completed }
-        
-        // 3. "Completed" is only for .completed items
         completedVaccines = scopedVaccines.filter { $0.status == .completed }
-        
-        // 4. Refresh the table
         tableView.reloadData()
     }
-
-    // Add some sample data to test
-    // In vaccinationViewController.swift
-
-    // In vaccinationViewController.swift
-
-    // In vaccinationViewController.swift
 
     func loadSampleVaccines() {
         masterVaccineList = [
@@ -342,22 +300,13 @@ class vaccinationViewController: UIViewController, EditVaccinationDelegate {
                     longDescription: "Protects against Human Papillomavirus. Given between 10-12 years.",
                     schedule: .tenToTwelveYears, status: .due, notes: nil, givenDate: nil, photoData: nil)
         ]
-        
-        // Run the filter on launch to populate the list
         filterVaccines()
     }
     
     
     func didUpdateVaccine(_ updatedVaccine: Vaccine) {
-        
-        // 1. Find the original vaccine in the master list using its name
         if let index = masterVaccineList.firstIndex(where: { $0.name == updatedVaccine.name }) {
-            
-            // 2. Replace it with the updated version
             masterVaccineList[index] = updatedVaccine
-            
-            // 3. Re-filter and reload the table to show the change
-            // This will automatically move the item from "Due" to "Completed"
             filterVaccines()
         } else {
             print("Error: Could not find matching vaccine to update.")
@@ -367,68 +316,53 @@ class vaccinationViewController: UIViewController, EditVaccinationDelegate {
 
 
 // MARK: - Table View Extensions
-// (Extensions must come AFTER the class definition)
 
 extension vaccinationViewController: UITableViewDataSource {
-    
-    // 1. Tell the table view there are two sections
     func numberOfSections(in tableView: UITableView) -> Int {
         return sectionTitles.count
     }
-    
-    // 2. Set the title for each section header
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        // Give the header some space, but only if it has content
         if section == 0 && !dueVaccines.isEmpty {
-            return 20 // Height for the "Due" header
+            return 20
         } else if section == 1 && !completedVaccines.isEmpty {
-            return 20 // Height for the "Completed" header
+            return 20
         }
-        return 0 // No height if the section is empty
+        return 0
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        // 1. Create the container view for the header
         let headerView = UIView()
-        headerView.backgroundColor = .clear // <<< This makes the background transparent
-
-        // 2. Create the label
+        headerView.backgroundColor = .clear
         let titleLabel = UILabel()
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.font = UIFont.systemFont(ofSize: 15, weight: .medium)
-        titleLabel.textColor = UIColor.label // This will be black/white depending on light/dark mode
-
-        // 3. Set the text based on the section
+        titleLabel.textColor = UIColor.label
+        
         if section == 0 && !dueVaccines.isEmpty {
             titleLabel.text = "Due"
         } else if section == 1 && !completedVaccines.isEmpty {
             titleLabel.text = "Completed"
         } else {
-            return nil // Return nothing if the section is empty
+            return nil
         }
-
-        // 4. Add the label and set its position
+        
         headerView.addSubview(titleLabel)
         NSLayoutConstraint.activate([
-            // Pin the label to the leading edge (left side) with 16 points of padding
             titleLabel.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 16),
-            // Center the label vertically in the header view
             titleLabel.centerYAnchor.constraint(equalTo: headerView.centerYAnchor)
         ])
-
+        
         return headerView
     }
-
-    // 3. Set the number of rows for each section
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return dueVaccines.count // Rows for "Due"
+            return dueVaccines.count
         } else {
-            return completedVaccines.count // Rows for "Completed"
+            return completedVaccines.count
         }
     }
     
-    // 4. Configure the cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "VaccineCell", for: indexPath) as? VaccineCell else {
@@ -442,19 +376,14 @@ extension vaccinationViewController: UITableViewDataSource {
             vaccine = completedVaccines[indexPath.row]
         }
         
-        // Configure the custom cell's labels
-        cell.configure(with: vaccine) // <<< Make sure VaccineCell.swift uses .fullName
-        
+        cell.configure(with: vaccine)
         return cell
     }
 }
 
 extension vaccinationViewController: UITableViewDelegate {
-    // Handle taps to see vaccine details
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
-        // 1. Get the selected vaccine
         let selectedVaccine: Vaccine
         if indexPath.section == 0 {
             selectedVaccine = dueVaccines[indexPath.row]
@@ -462,18 +391,14 @@ extension vaccinationViewController: UITableViewDelegate {
             selectedVaccine = completedVaccines[indexPath.row]
         }
         
-        // 2. Create the detail VC
         let detailVC = EditVaccinationLogViewController(nibName: "EditVaccinationLogViewController", bundle: nil)
         
-        // 3. Pass the data
         detailVC.vaccine = selectedVaccine
         
-        // 4. <<< CRITICAL: SET THE DELEGATE >>>
         detailVC.delegate = self
         
         detailVC.hidesBottomBarWhenPushed = true
         
-        // 5. Push it onto the navigation stack
         self.navigationController?.pushViewController(detailVC, animated: true)
     }
 }

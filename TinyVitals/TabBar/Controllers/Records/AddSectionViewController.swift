@@ -8,9 +8,8 @@
 import UIKit
 
 protocol AddSectionDelegate: AnyObject {
-    // This method will be called when the user hits 'Add' on the modal screen
     func didAddSection(name: String)
-    func didEditSection(oldName: String, newName: String) // <<< NEW
+    func didEditSection(oldName: String, newName: String)
 }
 
 class AddSectionViewController: UIViewController {
@@ -18,7 +17,7 @@ class AddSectionViewController: UIViewController {
     weak var delegate: AddSectionDelegate?
     @IBOutlet weak var nameTextField: UITextField!
     
-    var currentSectionName: String? // Holds the name if in Edit Mode
+    var currentSectionName: String?
     var isEditingMode: Bool = false
     
     override func viewDidLoad() {
@@ -28,15 +27,12 @@ class AddSectionViewController: UIViewController {
         if isEditingMode, let name = currentSectionName {
             nameTextField.text = name
         }
-        // --- Setup Navigation Bar Buttons ---
-        // 1. ADD Button (The Primary Action on the Right)
-        // The action will call the existing finalAddButtonTapped logic.
         let buttonTitle = isEditingMode ? "Save" : "Add"
                 navigationItem.rightBarButtonItem = UIBarButtonItem(
                     title: buttonTitle,
                     style: .done,
                     target: self,
-                    action: #selector(finalAddButtonTapped) // Renamed for generic action
+                    action: #selector(finalAddButtonTapped)
                 )
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel",
                                                             style: .plain,
@@ -45,25 +41,20 @@ class AddSectionViewController: UIViewController {
     }
     
     @objc func finalAddButtonTapped(_ sender: Any) {
-        // 1. Validate input
         guard let newName = nameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines), !newName.isEmpty else {
             showConfirmationMessage(title: "Required", message: "Please enter a name for the new section.")
             return
         }
 
         if isEditingMode, let oldName = currentSectionName {
-            // 2. EDIT MODE: Delegate the change
             delegate?.didEditSection(oldName: oldName, newName: newName)
         } else {
-            // 2. ADD MODE: Delegate the new name
             delegate?.didAddSection(name: newName)
         }
-        // 3. Dismiss the modal screen
         dismiss(animated: true, completion: nil)
     }
     
     @objc func cancelButtonTapped() {
-        // Simply dismiss the modal presentation
         dismiss(animated: true, completion: nil)
     }
     
