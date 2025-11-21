@@ -33,7 +33,7 @@ class ChildProfileCell: UICollectionViewCell {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        childImageView.layer.cornerRadius = childImageView.bounds.height / 2
+//        childImageView.layer.cornerRadius = childImageView.bounds.height / 2
     }
 
     @objc private func imageTapped() {
@@ -45,7 +45,7 @@ class ChildProfileCell: UICollectionViewCell {
         if let img = model.image {
             childImageView.image = img
         } else {
-            childImageView.image = UIImage(systemName: "person.crop.circle.fill")
+//            childImageView.image = UIImage(named: "ChildPhoto")/
         }
     }
 }

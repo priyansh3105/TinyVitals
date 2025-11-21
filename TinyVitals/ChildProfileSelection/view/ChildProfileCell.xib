@@ -19,8 +19,9 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Izh-VD-SdJ">
                         <rect key="frame" x="0.0" y="0.0" width="215" height="213"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zTW-2l-n3K">
-                                <rect key="frame" x="57.666666666666657" y="56.666666666666657" width="100" height="100"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.crop.circle.badge.plus" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="zTW-2l-n3K">
+                                <rect key="frame" x="55.000000000000007" y="57.333333333333329" width="102.66666666666669" height="100.00000000000004"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="UFr-iY-UBT"/>
                                     <constraint firstAttribute="width" constant="100" id="YZQ-tS-4s9"/>
@@ -64,4 +65,7 @@
             <point key="canvasLocation" x="112.21374045801527" y="75.704225352112687"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="person.crop.circle.badge.plus" catalog="system" width="128" height="114"/>
+    </resources>
 </document>

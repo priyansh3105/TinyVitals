@@ -24,100 +24,101 @@
                         <constraint firstAttribute="height" constant="90" id="e7C-Ii-cdc"/>
                     </constraints>
                 </imageView>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="YvQ-Nt-C9C">
-                    <rect key="frame" x="20" y="238" width="353" height="350"/>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="YvQ-Nt-C9C">
+                    <rect key="frame" x="20" y="238" width="353" height="344"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KJp-gx-LYn">
-                            <rect key="frame" x="0.0" y="0.0" width="353" height="39.333333333333336"/>
+                            <rect key="frame" x="0.0" y="0.0" width="353" height="43"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Email " minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zWd-j5-q9Y">
-                            <rect key="frame" x="0.0" y="44.333333333333314" width="353" height="39.333333333333343"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <textInputTraits key="textInputTraits"/>
+                        <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter email " minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zWd-j5-q9Y">
+                            <rect key="frame" x="0.0" y="43" width="353" height="43"/>
+                            <color key="backgroundColor" red="0.80000000000000004" green="0.85882352939999995" blue="0.95294117649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="43" id="0QJ-Ey-d0e"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <textInputTraits key="textInputTraits" textContentType="email"/>
                             <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                    <integer key="value" value="1"/>
-                                </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                    <integer key="value" value="10"/>
+                                    <integer key="value" value="5"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </textField>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone No" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G30-OT-db8">
-                            <rect key="frame" x="0.0" y="88.666666666666686" width="353" height="39.333333333333343"/>
+                            <rect key="frame" x="0.0" y="86" width="353" height="43"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter phone number" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nZs-fa-B7m">
-                            <rect key="frame" x="0.0" y="133" width="353" height="39.666666666666657"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <textInputTraits key="textInputTraits"/>
+                            <rect key="frame" x="0.0" y="129" width="353" height="43"/>
+                            <color key="backgroundColor" red="0.80000000000000004" green="0.85882352939999995" blue="0.95294117649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="43" id="uDd-cT-YEK"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <textInputTraits key="textInputTraits" textContentType="tel"/>
                             <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                    <integer key="value" value="1"/>
-                                </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                    <integer key="value" value="10"/>
+                                    <integer key="value" value="5"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </textField>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d2I-92-DU2">
-                            <rect key="frame" x="0.0" y="177.66666666666669" width="353" height="39.333333333333343"/>
+                            <rect key="frame" x="0.0" y="172" width="353" height="43"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LrO-pt-DzT">
-                            <rect key="frame" x="0.0" y="222" width="353" height="39.333333333333314"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <textInputTraits key="textInputTraits"/>
+                            <rect key="frame" x="0.0" y="215" width="353" height="43"/>
+                            <color key="backgroundColor" red="0.80000000000000004" green="0.85882352939999995" blue="0.95294117649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="43" id="UK5-5l-k8Y"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <textInputTraits key="textInputTraits" textContentType="password"/>
                             <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                    <integer key="value" value="1"/>
-                                </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                    <integer key="value" value="10"/>
+                                    <integer key="value" value="5"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </textField>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confirm Password" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y9h-UT-wcB">
-                            <rect key="frame" x="0.0" y="266.33333333333331" width="353" height="39.333333333333314"/>
+                            <rect key="frame" x="0.0" y="258" width="353" height="43"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yE2-9F-h2O">
-                            <rect key="frame" x="0.0" y="310.66666666666663" width="353" height="39.333333333333314"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <textInputTraits key="textInputTraits"/>
+                        <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yE2-9F-h2O">
+                            <rect key="frame" x="0.0" y="301" width="353" height="43"/>
+                            <color key="backgroundColor" red="0.80000000000000004" green="0.85882352939999995" blue="0.95294117649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="43" id="ajM-Af-UdR"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <textInputTraits key="textInputTraits" textContentType="password"/>
                             <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                    <integer key="value" value="1"/>
-                                </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                    <integer key="value" value="10"/>
+                                    <integer key="value" value="5"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </textField>
                     </subviews>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="350" id="2Py-Tb-wUU"/>
-                    </constraints>
                 </stackView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oBW-YB-gGv">
-                    <rect key="frame" x="30" y="648" width="333" height="40"/>
-                    <color key="backgroundColor" red="0.33333333333333331" green="0.49803921568627452" blue="0.76862745098039209" alpha="1" colorSpace="calibratedRGB"/>
+                    <rect key="frame" x="30" y="642" width="333" height="40"/>
+                    <color key="backgroundColor" red="0.30980392159999998" green="0.5568627451" blue="0.87843137250000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="I5f-fe-O6R"/>
                     </constraints>
                     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="plain" title="Sign up">
-                        <fontDescription key="titleFontDescription" type="system" weight="medium" pointSize="17"/>
+                        <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="15"/>
                     </buttonConfiguration>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -129,7 +130,7 @@
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Already have an account? " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mZ7-oE-RQ7">
-                    <rect key="frame" x="30" y="713" width="223" height="30"/>
+                    <rect key="frame" x="30" y="707" width="223" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="eeL-Qq-zfO"/>
                     </constraints>
@@ -138,12 +139,14 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ISM-aP-30Q">
-                    <rect key="frame" x="253" y="713" width="80" height="30"/>
+                    <rect key="frame" x="253" y="707" width="80" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="Br1-FG-bFb"/>
                     </constraints>
                     <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="plain" title="Sign in"/>
+                    <buttonConfiguration key="configuration" style="plain" title="Sign in">
+                        <fontDescription key="titleFontDescription" type="system" pointSize="15"/>
+                    </buttonConfiguration>
                     <connections>
                         <action selector="signInButtonTapped:" destination="-1" eventType="touchUpInside" id="iJo-Ec-zog"/>
                     </connections>

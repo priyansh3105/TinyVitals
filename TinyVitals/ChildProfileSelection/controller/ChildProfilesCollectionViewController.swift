@@ -57,10 +57,11 @@ extension ChildProfilesCollectionViewController: UICollectionViewDataSource, UIC
 
         if model.name.isEmpty {
             cell.nameLabel.text = ""
-            cell.childImageView.image = UIImage(systemName: "person.crop.circle.badge.plus")
+//            cell.childImageView.image = UIImage(named: "ChildPhoto")
         } else {
             cell.nameLabel.text = model.name
-            cell.childImageView.image = model.image ?? UIImage(systemName: "person.circle.fill")
+            cell.childImageView.image = model.image ?? UIImage(named: "ChildPhoto")
+            
         }
 
         // ✅ Assign delegate to handle image tap

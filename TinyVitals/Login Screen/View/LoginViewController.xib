@@ -3,6 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -52,15 +53,16 @@
                             <rect key="frame" x="0.0" y="52" width="353" height="50"/>
                             <subviews>
                                 <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter you Email Id" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9Nk-BG-oTX">
-                                    <rect key="frame" x="0.0" y="8" width="353" height="34"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <textInputTraits key="textInputTraits"/>
+                                    <rect key="frame" x="0.0" y="3.6666666666666856" width="353" height="43"/>
+                                    <color key="backgroundColor" red="0.80000000000000004" green="0.85882352941176465" blue="0.95294117647058818" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="43" id="BCT-jl-o91"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                    <textInputTraits key="textInputTraits" textContentType="email"/>
                                     <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                            <integer key="value" value="1"/>
-                                        </userDefinedRuntimeAttribute>
                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                            <integer key="value" value="10"/>
+                                            <integer key="value" value="5"/>
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </textField>
@@ -93,23 +95,26 @@
                             <rect key="frame" x="0.0" y="156" width="353" height="50"/>
                             <subviews>
                                 <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter you password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="51C-dL-PtR">
-                                    <rect key="frame" x="0.0" y="8" width="353" height="34"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <textInputTraits key="textInputTraits"/>
+                                    <rect key="frame" x="0.0" y="3.6666666666666856" width="353" height="43"/>
+                                    <color key="backgroundColor" red="0.80000000000000004" green="0.85882352939999995" blue="0.95294117649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="43" id="UCz-uK-NxB"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                    <textInputTraits key="textInputTraits" textContentType="password"/>
                                     <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                            <integer key="value" value="1"/>
-                                        </userDefinedRuntimeAttribute>
                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                            <integer key="value" value="10"/>
+                                            <integer key="value" value="5"/>
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </textField>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nmk-0S-pJ0">
-                                    <rect key="frame" x="295.33333333333331" y="8" width="57.666666666666686" height="34.333333333333336"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nmk-0S-pJ0">
+                                    <rect key="frame" x="308.33333333333331" y="8" width="44.666666666666686" height="34.333333333333336"/>
                                     <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <state key="normal" title="Button"/>
-                                    <buttonConfiguration key="configuration" style="plain" image="eye" catalog="system"/>
+                                    <buttonConfiguration key="configuration" style="plain">
+                                        <imageReference key="image" image="eye" catalog="system" symbolScale="small"/>
+                                    </buttonConfiguration>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -125,14 +130,14 @@
                 </stackView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iUS-aD-X3r">
                     <rect key="frame" x="20" y="549" width="353" height="40"/>
-                    <color key="backgroundColor" red="0.33333333333333331" green="0.49803921568627452" blue="0.76862745098039209" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.30980392159999998" green="0.5568627451" blue="0.87843137250000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="EAl-aP-dgA"/>
                     </constraints>
                     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="plain" title="Sign in">
-                        <fontDescription key="titleFontDescription" type="system" weight="medium" pointSize="17"/>
+                        <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="15"/>
                     </buttonConfiguration>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -216,7 +221,9 @@
                                         <constraint firstAttribute="height" constant="34.329999999999998" id="rHq-pN-xmK"/>
                                     </constraints>
                                     <state key="normal" title="Button"/>
-                                    <buttonConfiguration key="configuration" style="plain" title="Sign up"/>
+                                    <buttonConfiguration key="configuration" style="plain" title="Sign up">
+                                        <fontDescription key="titleFontDescription" type="system" pointSize="15"/>
+                                    </buttonConfiguration>
                                     <connections>
                                         <action selector="signUpButtontapped:" destination="-1" eventType="touchUpInside" id="q97-A6-Olc"/>
                                     </connections>
@@ -237,13 +244,13 @@
                     </constraints>
                 </stackView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="buF-p1-zQT">
-                    <rect key="frame" x="231.33333333333337" y="479" width="151.66666666666663" height="25"/>
+                    <rect key="frame" x="244" y="479" width="139" height="25"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="25" id="0lx-2B-40F"/>
                     </constraints>
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="plain" title="Forgot Password">
-                        <fontDescription key="titleFontDescription" type="system" pointSize="17"/>
+                        <fontDescription key="titleFontDescription" type="system" pointSize="15"/>
                     </buttonConfiguration>
                     <connections>
                         <action selector="forgotPasswordButtonTapped:" destination="-1" eventType="touchUpInside" id="Oxu-NC-wZg"/>
