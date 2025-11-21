@@ -1066,7 +1066,7 @@
         <!--Home-->
         <scene sceneID="7zW-Lc-c8G">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7J2-xt-bwJ" sceneMemberID="viewController">
+                <navigationController title="Home" automaticallyAdjustsScrollViewInsets="NO" id="7J2-xt-bwJ" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Home" image="house" catalog="system" selectedImage="house.fill" id="lgv-qd-pax"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="qjQ-kd-rb6">

@@ -16,6 +16,14 @@ class homeViewController: UIViewController {
     @IBOutlet weak var childProfileCompletionStatus: CircularProgressView!
     override func viewDidLoad() {
         super.viewDidLoad()
+//        let titleLabel = UILabel()
+//        titleLabel.text = "Home"
+//        titleLabel.font = UIFont.systemFont(ofSize: 32, weight: .bold)
+//        titleLabel.textColor = .black
+//        titleLabel.sizeToFit()
+//        let leftItem = UIBarButtonItem(customView: titleLabel)
+//        navigationItem.leftBarButtonItem = leftItem
+        
         setupGradient()
         childProfileImageView.layer.borderColor = UIColor.systemBlue.cgColor
         childProfileCompletionStatus.progress = 0.6
