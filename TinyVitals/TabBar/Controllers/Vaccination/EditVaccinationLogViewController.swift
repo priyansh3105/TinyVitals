@@ -27,11 +27,8 @@ class EditVaccinationLogViewController: UIViewController, UITextViewDelegate, UI
     var selectedPhotoData: Data?
     weak var delegate: EditVaccinationDelegate?
     var vaccine: Vaccine?
-    
-    // This property holds the currently selected state
     var selectedStatus: VaccinationStatus = .due
     var selectedDate: Date = Date()
-    // 'notes' variable is no longer needed, we read directly from noteTextView
     
     // MARK: - Lifecycle
     override func viewDidLoad() {

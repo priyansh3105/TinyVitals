@@ -2,16 +2,15 @@ import UIKit
 import MobileCoreServices
 import UniformTypeIdentifiers
 import CoreGraphics
-import QuickLook // <<< ADD IMPORT
+import QuickLook
 
 // MARK: - Delegate Protocol
 protocol LogSymptomsDelegate: AnyObject {
     func didLogNewSymptom(_ entry: SymptomEntry)
-    func didUpdateSymptom(_ entry: SymptomEntry) // <<< ADD THIS NEW METHOD
+    func didUpdateSymptom(_ entry: SymptomEntry)
 }
 
 // MARK: - Class Definition
-// Add all new delegate conformances
 class LogSymptomsViewController: UIViewController, UITextViewDelegate, SymptomSelectionDelegate, UIDocumentPickerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, QLPreviewControllerDataSource, QLPreviewControllerDelegate, UIGestureRecognizerDelegate {
     
     // MARK: - Outlets
@@ -29,7 +28,6 @@ class LogSymptomsViewController: UIViewController, UITextViewDelegate, SymptomSe
     @IBOutlet weak var noteTextView: UITextView!
     @IBOutlet weak var addPhotoView: UIView!
     
-    // <<< ADD THESE NEW OUTLETS >>>
     @IBOutlet weak var photoPreviewImageView: UIImageView!
     
     @IBOutlet weak var saveButton: UIButton!
@@ -42,58 +40,45 @@ class LogSymptomsViewController: UIViewController, UITextViewDelegate, SymptomSe
     var selectedTemperature: Double?
     var selectedWeight: Double?
     var selectedHeight: Double?
-    var selectedPhotoData: Data? // <<< ADD PROPERTY
+    var selectedPhotoData: Data?
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // --- Setup Delegates ---
         descriptionTextView.delegate = self
         noteTextView.delegate = self
         
-        // --- Add Tap Gestures ---
         addTapGesture(to: symptomsView, action: #selector(symptomsTapped))
         addTapGesture(to: temperatureView, action: #selector(temperatureTapped))
         addTapGesture(to: weightView, action: #selector(weightTapped))
         addTapGesture(to: heightView, action: #selector(heightTapped))
         addTapGesture(to: addPhotoView, action: #selector(addPhotoTapped))
         
-        // --- Setup Photo Taps ---
         let previewTap = UITapGestureRecognizer(target: self, action: #selector(photoPreviewTapped))
         previewTap.delegate = self
         previewTap.cancelsTouchesInView = false
         photoPreviewImageView.isUserInteractionEnabled = true
         photoPreviewImageView.addGestureRecognizer(previewTap)
         
-        // Add Long Press gesture for Deletion
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(photoLongPressed(_:)))
         photoPreviewImageView.addGestureRecognizer(longPressGesture)
         
-        // Add gesture to dismiss keyboard
         let viewTap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         viewTap.cancelsTouchesInView = false
         view.addGestureRecognizer(viewTap)
         
-        // --- NEW: Check if we are Editing or Creating ---
         if let entry = existingEntry {
-            // --- EDIT MODE ---
-            // We are editing, so populate the form with existing data
             self.title = "Edit Log"
             populateForm(with: entry)
             
         } else {
-            // --- CREATE NEW MODE ---
-            // We are creating a new log, set up placeholders
             self.title = "Log Symptoms"
             setupPlaceholderText()
             
-            // Set initial label text
             selectedSymptomsLabel.text = "None selected"
-            selectedSymptomsLabel.textColor = .lightGray // Use lightGray for placeholder
-            
-            // Set initial photo state
+            selectedSymptomsLabel.textColor = .lightGray
             photoPreviewImageView.isHidden = true
             addPhotoView.isHidden = false
         }
@@ -103,12 +88,10 @@ class LogSymptomsViewController: UIViewController, UITextViewDelegate, SymptomSe
     // MARK: - Save Action
     
     @IBAction func saveButtonTapped(_ sender: Any) {
-        // --- 1. Get Data from UI ---
         guard let title = titleTextField.text, !title.isEmpty else {
             showConfirmationMessage(title: "Title Required", message: "...")
             return
         }
-        // ... (get all other data from text fields, pickers, etc.) ...
         let description = (descriptionTextView.textColor == .lightGray) ? nil : descriptionTextView.text
         let notes = (noteTextView.textColor == .lightGray) ? nil : noteTextView.text
         let date = datePicker.date
@@ -117,12 +100,9 @@ class LogSymptomsViewController: UIViewController, UITextViewDelegate, SymptomSe
         let weight = self.selectedWeight
         let height = self.selectedHeight
         
-        // --- 2. Check if we are Editing or Saving New ---
         if var entryToUpdate = existingEntry {
-            // --- We are UPDATING ---
-            // Create a *new* entry object based on the old one's ID
             let updatedEntry = SymptomEntry(
-                id: entryToUpdate.id, // <<< Use the ORIGINAL ID
+                id: entryToUpdate.id,
                 date: date,
                 title: title,
                 description: description,
@@ -132,16 +112,14 @@ class LogSymptomsViewController: UIViewController, UITextViewDelegate, SymptomSe
                 height: height,
                 notes: notes,
                 photoData: selectedPhotoData,
-                diagnosisID: entryToUpdate.diagnosisID, // Keep old diagnosis link
+                diagnosisID: entryToUpdate.diagnosisID,
                 diagnosedBy: entryToUpdate.diagnosedBy
             )
-            // Call the UPDATE delegate method
             delegate?.didUpdateSymptom(updatedEntry)
             
         } else {
-            // --- We are CREATING NEW ---
             let newEntry = SymptomEntry(
-                id: UUID(), // <<< Create a NEW ID
+                id: UUID(),
                 date: date,
                 title: title,
                 description: description,
@@ -154,10 +132,8 @@ class LogSymptomsViewController: UIViewController, UITextViewDelegate, SymptomSe
                 diagnosisID: nil,
                 diagnosedBy: nil
             )
-            // Call the NEW entry delegate method
             delegate?.didLogNewSymptom(newEntry)
         }
-        // --- 3. Go Back ---
         navigationController?.popViewController(animated: true)
     }
     
@@ -173,14 +149,12 @@ class LogSymptomsViewController: UIViewController, UITextViewDelegate, SymptomSe
         
         datePicker.date = entry.date
         
-        // Populate vitals
         selectedSymptoms = entry.symptoms
         selectedTemperature = entry.temperature
         selectedWeight = entry.weight
         selectedHeight = entry.height
         selectedPhotoData = entry.photoData
         
-        // Update photo view
         if let data = entry.photoData {
             photoPreviewImageView.image = UIImage(data: data)
             photoPreviewImageView.isHidden = false
@@ -300,21 +274,16 @@ class LogSymptomsViewController: UIViewController, UITextViewDelegate, SymptomSe
     // MARK: - Photo Actions
 
     @objc func photoLongPressed(_ gesture: UILongPressGestureRecognizer) {
-        // We only want to trigger this once when the press begins
         guard gesture.state == .began else { return }
         
-        // Show a confirmation alert
         let alert = UIAlertController(title: "Delete Photo", message: "Are you sure you want to remove this photo?", preferredStyle: .actionSheet)
         
-        // Add the "Delete" action
         alert.addAction(UIAlertAction(title: "Delete Photo", style: .destructive, handler: { [weak self] _ in
             self?.removePhoto()
         }))
         
-        // Add a "Cancel" action
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         
-        // For iPad compatibility
         if let popover = alert.popoverPresentationController {
             popover.sourceView = photoPreviewImageView
             popover.sourceRect = photoPreviewImageView.bounds
@@ -323,14 +292,13 @@ class LogSymptomsViewController: UIViewController, UITextViewDelegate, SymptomSe
         present(alert, animated: true)
     }
 
-    // This is the helper function you already have
     func removePhoto() {
         self.selectedPhotoData = nil
         
         UIView.animate(withDuration: 0.3) {
             self.photoPreviewImageView.image = nil
             self.photoPreviewImageView.isHidden = true
-            self.addPhotoView.isHidden = false // Show the "Add Photo" button again
+            self.addPhotoView.isHidden = false
         }
     }
     
@@ -348,14 +316,13 @@ class LogSymptomsViewController: UIViewController, UITextViewDelegate, SymptomSe
         present(picker, animated: true)
     }
 
-    // Unified function to handle the selected image
     func handleImageSelected(data: Data) {
         self.selectedPhotoData = data
         
         UIView.animate(withDuration: 0.3) {
             self.photoPreviewImageView.image = UIImage(data: data)
             self.photoPreviewImageView.isHidden = false
-            self.addPhotoView.isHidden = true // Hide the "Add Photo" button
+            self.addPhotoView.isHidden = true
         }
     }
     
@@ -405,16 +372,13 @@ extension LogSymptomsViewController {
 extension LogSymptomsViewController {
     
     func didSelectSymptoms(_ symptoms: [String]) {
-        // 1. Save the received symptoms to your local property
+        
         self.selectedSymptoms = symptoms
         
-        // 2. --- THIS IS THE FIX ---
-        // Update the new label to show the selected items
         if symptoms.isEmpty {
             selectedSymptomsLabel.text = "None selected"
             selectedSymptomsLabel.textColor = .lightGray
         } else {
-            // Join the array of strings into a single string
             selectedSymptomsLabel.text = symptoms.joined(separator: ", ")
             selectedSymptomsLabel.textColor = .label // Back to default color
         }

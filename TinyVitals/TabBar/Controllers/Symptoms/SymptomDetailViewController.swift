@@ -9,7 +9,7 @@ import UIKit
 
 protocol SymptomDetailDelegate: AnyObject {
     func didUpdateEntry(entry: SymptomEntry)
-    // func didDeleteEntry(entry: SymptomEntry) // We'll add this later
+    // func didDeleteEntry(entry: SymptomEntry)
 }
 
 
@@ -34,21 +34,16 @@ class SymptomDetailViewController: UIViewController, LogSymptomsDelegate {
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneTapped))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .done, target: self, action: #selector(editButtonTapped))
         populateData()
-        // Do any additional setup after loading the view.
+        
     }
-    
-    
-    // In SymptomDetailViewController.swift
 
     func populateData() {
         guard let entry = symptomEntry else { return }
         
         self.title = entry.title
         
-        // --- Description ---
         descriptionLabel.text = entry.description ?? "No description added."
         
-        // --- Symptoms ---
         if entry.symptoms.isEmpty {
             symptomsLabel.text = "No symptoms listed."
         } else {
@@ -56,7 +51,6 @@ class SymptomDetailViewController: UIViewController, LogSymptomsDelegate {
             symptomsLabel.text = bulletedSymptoms
         }
         
-        // --- VITALS FIX: Show "N/A" instead of hiding the label ---
         
         if let temp = entry.temperature {
             temperatureLabel.text = "Temperature: \(temp)°F"
@@ -75,11 +69,8 @@ class SymptomDetailViewController: UIViewController, LogSymptomsDelegate {
         } else {
             heightLabel.text = "Height: N/A"
         }
-
-        // --- Note ---
         noteLabel.text = entry.notes ?? "No note added."
         
-        // --- Photo ---
         if let data = entry.photoData {
             photoImageView.image = UIImage(data: data)
             photoImageView.isHidden = false
@@ -93,37 +84,21 @@ class SymptomDetailViewController: UIViewController, LogSymptomsDelegate {
     }
     
     @objc func editButtonTapped() {
-        // 1. Create an instance of the LogSymptoms screen
         let logVC = LogSymptomsViewController(nibName: "LogSymptomsViewController", bundle: nil)
-        
-        // 2. Set its delegate to *this* screen
         logVC.delegate = self
-        
-        // 3. THIS IS THE KEY: Pass the entry to pre-fill the form
         logVC.existingEntry = self.symptomEntry
-        
-        // 4. Push the edit screen
         self.navigationController?.pushViewController(logVC, animated: true)
     }
 }
 
 
 extension SymptomDetailViewController {
-    
-    // This method receives the *updated* entry from the edit screen (LogSymptomsVC)
     func didUpdateSymptom(_ entry: SymptomEntry) {
-        // 1. Update this screen's local data
         self.symptomEntry = entry
-        
-        // 2. Refresh the UI to show the changes
         populateData()
-        
-        // 3. Pass the change *further back* to the main list
         delegate?.didUpdateEntry(entry: entry)
     }
-    
-    // This is required by the protocol, but we don't use it here
     func didLogNewSymptom(_ entry: SymptomEntry) {
-        // Not used in this context
+        
     }
 }
