@@ -339,7 +339,7 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9aB-7n-cf6">
                                             <rect key="frame" x="10" y="0.0" width="373" height="90"/>
                                             <subviews>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Add a note" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="l3o-A4-MoT">
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.5" contentMode="scaleToFill" text="Add a note" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="l3o-A4-MoT">
                                                     <rect key="frame" x="5" y="5" width="368" height="85"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <color key="textColor" systemColor="labelColor"/>

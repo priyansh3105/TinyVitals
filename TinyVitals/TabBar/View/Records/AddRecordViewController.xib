@@ -3,6 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -106,24 +107,26 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fC3-bb-SCE">
-                    <rect key="frame" x="20" y="441" width="353" height="50"/>
+                    <rect key="frame" x="20" y="441" width="353" height="43"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="section to save" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XNm-Qa-6Kv">
-                            <rect key="frame" x="10" y="16" width="103.33333333333333" height="18"/>
+                            <rect key="frame" x="10" y="12.666666666666686" width="103.33333333333333" height="18"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron.forward" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="OfY-2C-JZH">
-                            <rect key="frame" x="328" y="14.999999999999996" width="20" height="20.333333333333339"/>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OfY-2C-JZH">
+                            <rect key="frame" x="328" y="13.000000000000018" width="20" height="17.333333333333339"/>
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="20" id="KPF-Kd-j6z"/>
                                 <constraint firstAttribute="height" constant="24" id="dWH-6p-ax8"/>
                             </constraints>
+                            <imageReference key="image" image="chevron.forward" catalog="system" symbolScale="small"/>
+                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="small"/>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="selected section" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YOE-TK-X6N">
-                            <rect key="frame" x="228" y="16" width="100" height="18"/>
+                            <rect key="frame" x="228" y="12.666666666666686" width="100" height="18"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="100" id="8X1-M3-07j"/>
                             </constraints>
@@ -140,7 +143,7 @@
                         <constraint firstItem="OfY-2C-JZH" firstAttribute="leading" secondItem="YOE-TK-X6N" secondAttribute="trailing" id="CTs-cZ-caV"/>
                         <constraint firstItem="OfY-2C-JZH" firstAttribute="centerY" secondItem="fC3-bb-SCE" secondAttribute="centerY" id="RYg-8n-2wy"/>
                         <constraint firstItem="XNm-Qa-6Kv" firstAttribute="centerY" secondItem="fC3-bb-SCE" secondAttribute="centerY" id="Rss-Ss-rcF"/>
-                        <constraint firstAttribute="height" constant="50" id="Tu1-ER-gQC"/>
+                        <constraint firstAttribute="height" constant="43" id="Tu1-ER-gQC"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -149,10 +152,10 @@
                     </userDefinedRuntimeAttributes>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VPH-vJ-htH">
-                    <rect key="frame" x="20" y="511" width="353" height="50"/>
+                    <rect key="frame" x="20" y="504" width="353" height="43"/>
                     <subviews>
                         <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" translatesAutoresizingMaskIntoConstraints="NO" id="Yf0-dy-7OP">
-                            <rect key="frame" x="218" y="2.6666666666666288" width="130" height="45"/>
+                            <rect key="frame" x="218" y="-1" width="130" height="45"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="45" id="jdt-GQ-Jvc"/>
                                 <constraint firstAttribute="width" constant="130" id="oZ6-Cb-XB9"/>
@@ -169,7 +172,7 @@
                     </subviews>
                     <color key="backgroundColor" red="0.80000001190000003" green="0.85882353779999998" blue="0.9529411793" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="50" id="OPk-yo-FvO"/>
+                        <constraint firstAttribute="height" constant="43" id="OPk-yo-FvO"/>
                         <constraint firstAttribute="trailing" secondItem="Yf0-dy-7OP" secondAttribute="trailing" constant="5" id="fSL-rk-CPa"/>
                         <constraint firstItem="Yf0-dy-7OP" firstAttribute="centerY" secondItem="VPH-vJ-htH" secondAttribute="centerY" id="pdD-Za-4ps"/>
                     </constraints>

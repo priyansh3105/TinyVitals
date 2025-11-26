@@ -112,8 +112,9 @@ class recordViewController: UIViewController, UITableViewDelegate, UITableViewDa
         button.contentEdgeInsets = UIEdgeInsets(top: 8, left: 10, bottom: 8, right: 10)
         button.layer.cornerRadius = 14
         button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor(red: 0.12, green: 0.45, blue: 0.9, alpha: 1.0).cgColor
-        let backgroundColor = isSelected ? UIColor(red: 0.12, green: 0.45, blue: 0.9, alpha: 1.0) : UIColor(red: 1, green: 1, blue: 1, alpha: 1.0)
+        button.layer.borderColor =
+        UIColor(red: 0.12, green: 0.45, blue: 0.9, alpha: 1.0).cgColor
+        let backgroundColor = isSelected ? UIColor(red: 0.20, green: 0.55, blue: 0.92, alpha: 1.0) : UIColor(red: 1, green: 1, blue: 1, alpha: 1.0)
         let textColor: UIColor = isSelected ? .white : .systemBlue
         let tintColor: UIColor = isSelected ? .white : .systemBlue
         button.backgroundColor = backgroundColor

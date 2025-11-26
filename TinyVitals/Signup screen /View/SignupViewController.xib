@@ -110,7 +110,7 @@
                     </subviews>
                 </stackView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oBW-YB-gGv">
-                    <rect key="frame" x="30" y="642" width="333" height="40"/>
+                    <rect key="frame" x="20" y="642" width="353" height="40"/>
                     <color key="backgroundColor" red="0.30980392159999998" green="0.5568627451" blue="0.87843137250000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="I5f-fe-O6R"/>
@@ -164,9 +164,9 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="mZ7-oE-RQ7" secondAttribute="trailing" constant="140" id="V2W-tg-qXn"/>
                 <constraint firstItem="YvQ-Nt-C9C" firstAttribute="top" secondItem="Laj-Ed-3Ly" secondAttribute="bottom" constant="30" id="aw6-BW-71x"/>
                 <constraint firstItem="ISM-aP-30Q" firstAttribute="top" secondItem="oBW-YB-gGv" secondAttribute="bottom" constant="25" id="bwo-HG-oY4"/>
-                <constraint firstItem="oBW-YB-gGv" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="e0E-7a-G3M"/>
+                <constraint firstItem="oBW-YB-gGv" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="e0E-7a-G3M"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ISM-aP-30Q" secondAttribute="trailing" constant="60" id="mOt-PM-Ji6"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="oBW-YB-gGv" secondAttribute="trailing" constant="30" id="scc-ef-WwD"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="oBW-YB-gGv" secondAttribute="trailing" constant="20" id="scc-ef-WwD"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="YvQ-Nt-C9C" secondAttribute="trailing" constant="20" id="swV-Dr-P4E"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Laj-Ed-3Ly" secondAttribute="trailing" constant="20" id="uXz-JM-mPH"/>
                 <constraint firstItem="ISM-aP-30Q" firstAttribute="leading" secondItem="mZ7-oE-RQ7" secondAttribute="trailing" id="vVl-OO-8hV"/>

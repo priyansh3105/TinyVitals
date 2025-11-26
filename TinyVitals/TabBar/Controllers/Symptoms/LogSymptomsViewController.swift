@@ -78,7 +78,7 @@ class LogSymptomsViewController: UIViewController, UITextViewDelegate, SymptomSe
             setupPlaceholderText()
             
             selectedSymptomsLabel.text = "None selected"
-            selectedSymptomsLabel.textColor = .lightGray
+            selectedSymptomsLabel.textColor = .systemGray
             photoPreviewImageView.isHidden = true
             addPhotoView.isHidden = false
         }
@@ -92,8 +92,8 @@ class LogSymptomsViewController: UIViewController, UITextViewDelegate, SymptomSe
             showConfirmationMessage(title: "Title Required", message: "...")
             return
         }
-        let description = (descriptionTextView.textColor == .lightGray) ? nil : descriptionTextView.text
-        let notes = (noteTextView.textColor == .lightGray) ? nil : noteTextView.text
+        let description = (descriptionTextView.textColor == .systemGray) ? nil : descriptionTextView.text
+        let notes = (noteTextView.textColor == .systemGray) ? nil : noteTextView.text
         let date = datePicker.date
         let symptoms = self.selectedSymptoms
         let temperature = self.selectedTemperature
@@ -142,10 +142,10 @@ class LogSymptomsViewController: UIViewController, UITextViewDelegate, SymptomSe
         titleTextField.text = entry.title
         
         descriptionTextView.text = entry.description
-        descriptionTextView.textColor = entry.description == nil ? .lightGray : .black
+        descriptionTextView.textColor = entry.description == nil ? .systemGray : .black
         
         noteTextView.text = entry.notes
-        noteTextView.textColor = entry.notes == nil ? .lightGray : .black
+        noteTextView.textColor = entry.notes == nil ? .systemGray : .black
         
         datePicker.date = entry.date
         
@@ -168,11 +168,11 @@ class LogSymptomsViewController: UIViewController, UITextViewDelegate, SymptomSe
     func setupPlaceholderText() {
         if descriptionTextView.text.isEmpty {
             descriptionTextView.text = "Description"
-            descriptionTextView.textColor = .lightGray
+            descriptionTextView.textColor = .systemGray
         }
         if noteTextView.text.isEmpty {
             noteTextView.text = "Add a note"
-            noteTextView.textColor = .lightGray
+            noteTextView.textColor = .systemGray
         }
     }
     
@@ -350,7 +350,7 @@ class LogSymptomsViewController: UIViewController, UITextViewDelegate, SymptomSe
 extension LogSymptomsViewController {
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.textColor == .lightGray {
+        if textView.textColor == .systemGray {
             textView.text = nil
             textView.textColor = .black
         }
@@ -363,7 +363,7 @@ extension LogSymptomsViewController {
             } else if textView == noteTextView {
                 textView.text = "Add a note"
             }
-            textView.textColor = .lightGray
+            textView.textColor = .systemGray
         }
     }
 }
@@ -377,10 +377,10 @@ extension LogSymptomsViewController {
         
         if symptoms.isEmpty {
             selectedSymptomsLabel.text = "None selected"
-            selectedSymptomsLabel.textColor = .lightGray
+            selectedSymptomsLabel.textColor = .systemGray
         } else {
             selectedSymptomsLabel.text = symptoms.joined(separator: ", ")
-            selectedSymptomsLabel.textColor = .label // Back to default color
+            selectedSymptomsLabel.textColor = .label
         }
     }
 }
