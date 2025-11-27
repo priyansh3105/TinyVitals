@@ -472,6 +472,9 @@
                             </barButtonItem>
                             <barButtonItem title="Item" image="person.2.arrow.trianglehead.counterclockwise" catalog="system" id="LF7-Gw-KG6">
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="childProfileSelection:" destination="Y6W-OH-hqX" id="tRW-1j-gQZ"/>
+                                </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
@@ -680,6 +683,9 @@
                             </barButtonItem>
                             <barButtonItem title="Item" image="person.2.arrow.trianglehead.counterclockwise" catalog="system" id="ghE-g3-gD8">
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="childProfileSelection:" destination="Eg2-pS-pXg" id="rxX-aY-hA1"/>
+                                </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
@@ -899,6 +905,9 @@
                             </barButtonItem>
                             <barButtonItem title="Item" image="person.2.arrow.trianglehead.counterclockwise" catalog="system" id="O2g-3D-eMx">
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="childProfileSelection:" destination="hVN-BI-ANq" id="bHu-Aq-inJ"/>
+                                </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
@@ -1028,6 +1037,9 @@
                             </barButtonItem>
                             <barButtonItem title="Item" image="person.2.arrow.trianglehead.counterclockwise" catalog="system" id="nAF-hw-xtD">
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="childProfileSelection:" destination="Glh-4J-VMW" id="lkx-vi-rm5"/>
+                                </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>

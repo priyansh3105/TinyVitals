@@ -31,6 +31,19 @@ class homeViewController: UIViewController {
         homeSuperView.layer.insertSublayer(gradientLayer, at: 0)
     }
     
+    @IBAction func childProfileSelection(_ sender: UIBarButtonItem) {
+        let childVC = ChildProfilesCollectionViewController(nibName: "ChildProfilesCollectionViewController", bundle: nil)
+        let navVC = UINavigationController(rootViewController: childVC)
+
+        guard let window = self.view.window else { return }
+
+        window.rootViewController = navVC
+        UIView.transition(with: window,
+                          duration: 0.4,
+                          options: .transitionCrossDissolve,
+                          animations: nil,
+                          completion: nil)
+    }
     /*
     // MARK: - Navigation
 
